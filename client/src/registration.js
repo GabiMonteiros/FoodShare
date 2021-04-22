@@ -1,7 +1,12 @@
-//import Logo from "./logo";
+import Logo from "./logo";
 import { Component } from "react";
 import axios from "./axios"
-//import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+
+//fazer uma route bio para donor
+//fazer uma route bio para distributor
+
+
 
 export default class Registration extends Component {
     constructor() {
@@ -22,7 +27,8 @@ export default class Registration extends Component {
             !this.state.first ||
             !this.state.last ||
             !this.state.email ||
-            !this.state.password
+            !this.state.password ||
+            !this.state.status
         ) {
             
             console.log("posting");
@@ -84,11 +90,14 @@ export default class Registration extends Component {
                     type="password"
                     required
                 />
+                <input
+                    className="statusDonor"
+                    name="status"
+                    placeholder="Donor"
+                    type="text"
+                />
 
-                <button
-                    className="sig-up"
-                    onClick={(e) => this.handleClick(e)}
-                >
+                <button className="sig-up" onClick={(e) => this.handleClick(e)}>
                     Sign Up
                 </button>
             </div>
