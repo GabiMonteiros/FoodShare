@@ -24,6 +24,7 @@ const cookieSessionMiddleware = cookieSession({
     // expiration date miliseconds x seconds x minutes x hours x days
 });
 
+app.use(csurf());
 app.use(compression());
 
 
@@ -57,6 +58,33 @@ app.post("/home/registration", (req, res) => {
         });
 });
 
+app.post("/home/login", (req, res) => {
+    const { email, password } = req.body;
+    db.getUserInfo(email)
+        .then(({ rows }) => {
+            if (rows.length > 0) {
+                compare(password, rows[0].password)
+                    .then((result) => {
+                        if (result) {
+                            req.session.userId = rows[0].id;
+                            res.json({ error: false });
+                        } else {
+                            res.json({ error: true });
+                        }
+                    })
+                    .catch((error) => {
+                        console.log("error in compare password", error);
+                        res.json({ error: true });
+                    });
+            } else {
+                res.json({ error: true });
+            }
+        })
+        .catch((error) => {
+            console.log("error in getUserInfo", error);
+            res.json({ error: true });
+        });
+});
 
 
 

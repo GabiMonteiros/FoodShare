@@ -57,49 +57,64 @@ export default class Registration extends Component {
 
     render() {
         return (
-            <div>
-                <h1>Food share Plataform</h1>
-                <input
-                    onChange={(e) => this.handleChange(e)}
-                    name="first"
-                    placeholder="First Name"
-                    type="text"
-                    required
-                />
+            <div className="formField">
+                <div className="form">
+                    <div className="header">
+                        <h2>Registration</h2>
+                        <p>Your journey starts here! Set up your profile.</p>
+                        {this.state.error && (
+                            <p>
+                                <span className="errorMessage">
+                                    Something went wrong. Please try again
+                                </span>
+                            </p>
+                        )}
+                    </div>
+                    <input
+                        onChange={(e) => this.handleChange(e)}
+                        name="first"
+                        placeholder="First Name"
+                        type="text"
+                        required
+                    />
 
-                <input
-                    onChange={(e) => this.handleChange(e)}
-                    name="last"
-                    placeholder="Last Name"
-                    type="text"
-                    required
-                />
+                    <input
+                        onChange={(e) => this.handleChange(e)}
+                        name="last"
+                        placeholder="Last Name"
+                        type="text"
+                        required
+                    />
 
-                <input
-                    onChange={(e) => this.handleChange(e)}
-                    name="email"
-                    placeholder="Email"
-                    type="text"
-                    required
-                />
+                    <input
+                        onChange={(e) => this.handleChange(e)}
+                        name="email"
+                        placeholder="Email"
+                        type="text"
+                        required
+                    />
 
-                <input
-                    onChange={(e) => this.handleChange(e)}
-                    name="password"
-                    placeholder="Password"
-                    type="password"
-                    required
-                />
-                <input
-                    className="statusDonor"
-                    name="status"
-                    placeholder="Donor"
-                    type="text"
-                />
+                    <input
+                        onChange={(e) => this.handleChange(e)}
+                        name="password"
+                        placeholder="Password"
+                        type="password"
+                        required
+                    />
+                    <input
+                        className="statusDonor"
+                        name="status"
+                        placeholder="Donor"
+                        type="text"
+                    />
 
-                <button className="sig-up" onClick={(e) => this.handleClick(e)}>
-                    Sign Up
-                </button>
+                    <button
+                        className="sig-up"
+                        onClick={(e) => this.handleClick(e)}
+                    >
+                        Sign Up
+                    </button>
+                </div>
             </div>
         );
     }

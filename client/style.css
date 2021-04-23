@@ -1,3 +1,140 @@
+
+/* 
+$font-stack: 'Comfortaa', sans-serif;
+$font-title: 'Space Grotesk', serif;
+$font-color: #2a293e;
+$bcg-color: #fff;
+$primary-color: #fe7bdb;
+$secundary-color: #95e5fe;
+$third-color: #8dffe8;
+$fourth-color: #fbfe4b; */
+
+
 body {
-    background-color: rgb(54, 54, 230);
+    box-sizing: border-box;
+    margin: 0;
+    font: 100% Verdana ;
+    background-color: #fff;
+    color: #2a293e;
+    font-size: 1rem;
+    
 }
+
+h1  {
+        font-family: 'roboto', serif;
+        letter-spacing: 0.2rem;
+        margin-top: 2vw;
+        
+    }
+
+    main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* assim fica no tamanho da tela do laptop */
+}
+
+header {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0;
+    padding: 1.5vw 3vw;
+    height: 6vh;
+    /* background-color: #fff; */
+    z-index: 10;
+    
+    
+}
+
+/* .profile-img {
+    border-radius: 50% 50% 0 50%;
+    height: 45px;
+    width: 45px;
+    cursor: pointer;
+    object-fit: cover;
+    object-position: center right;
+    vertical-align: middle;
+    box-shadow: none;
+} */
+
+.scroll {
+    box-shadow: 0 8px 6px -6px #e6fe4b;
+}
+
+.logo {
+    width: 5em;
+    height: 5em;
+    margin-top: 1.5vw;
+}
+
+nav{
+    margin-left: auto;
+}
+li {/*tira s bolas*/
+    position: relative;
+    display: inline-block;
+    list-style-type: none;
+    padding: 0 1rem;
+}
+
+ul {
+    display: flex;
+    align-items: center;
+}
+
+/*coooor*/
+
+ svg {
+    width: 1.5rem;
+    cursor: pointer;
+    
+}
+
+svg:hover {
+    color: #fe7bdb;
+}
+            
+a {
+    text-decoration: none;
+    color: #2a293e;
+}
+
+/*//////////HOME///////////////*/
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    margin: 1vw 1vh;
+}    
+
+.grid {
+    display: grid;
+    grid-template: repeat(2, [row] 1fr) / repeat(4, [col] 1fr);
+    /* // grid-gap: 1.5vw; */
+    margin: 0 5vw;
+    min-height: 100vh;
+   
+}
+
+
+.item-1,
+    .item-2 {
+    align-items: center;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.item-1 {
+    grid-column: col 1 / span 2;
+    grid-row: row 1 / span 2;
+    z-index: 2;
+    margin-right: 2rem;
+}
+
+/*REGISTRATION*/
