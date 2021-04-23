@@ -1,6 +1,6 @@
 import { Component } from "react";
 import axios from "./axios";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default class Login extends Component {
     constructor() {
@@ -10,34 +10,34 @@ export default class Login extends Component {
         };
     }
 
-    // handleChange(e) {
-    //     this.setState(
-    //         {
-    //             [e.target.name]: e.target.value,
-    //         },
-    //         () => console.log("this.state in handleChange: ")
-    //     );
-    // }
+    handleChange(e) {
+        this.setState(
+            {
+                [e.target.name]: e.target.value,
+            },
+            () => console.log("this.state in handleChange: ")
+        );
+    }
 
-    // handleClick(e) {
-    //     console.log("handleClick ", this.state);
-    //     e.preventDefault();
-    //     axios
-    //         .post("/home/login", this.state)
-    //         .then(({ data }) => {
-    //             console.log("data ", data);
-    //             if (data.error) {
-    //                 this.setState({
-    //                     error: true,
-    //                 });
-    //             } else {
-    //                 location.replace("/");
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log("error on axios.post /login: ", error);
-    //         });
-    // }
+    handleClick(e) {
+        console.log("handleClick ", this.state);
+        e.preventDefault();
+        axios
+            .post("/home/login", this.state)
+            .then(({ data }) => {
+                console.log("data ", data);
+                if (data.error) {
+                    this.setState({
+                        error: true,
+                    });
+                } else {
+                    location.replace("/");
+                }
+            })
+            .catch((error) => {
+                console.log("error on axios.post /login: ", error);
+            });
+    }
 
     render() {
         return (
@@ -50,7 +50,7 @@ export default class Login extends Component {
                             Something went wrong. Please try again
                         </p>
                     )}
-                {/* </div>
+                </div>
                 <div className="form">
                     <input
                         onChange={(e) => this.handleChange(e)}
@@ -73,7 +73,7 @@ export default class Login extends Component {
                 <Link to="/registration">
                     <button className="sig-up submits">Sign Up</button>
                 </Link>
-                <Link to="/reset-password">
+                {/* <Link to="/reset-password">
                     <button className="frgt-pass submits">New Password?</button>
                 </Link> */}
             </div>

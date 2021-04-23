@@ -14,6 +14,24 @@ const s3 = require("./s3");
 const { s3Url } = require("./config.json");
 
 
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
+});
+
+let secret;
+process.env.NODE_ENV === "production"
+    ? (secret = process.env)
+    : (secret = require("./secrets.json"));
+
+app.use(
+    express.json({
+        extended: false,
+    })
+);
+
 
 const cookieSession = require("cookie-session");
 // const { userInfo } = require("os");
@@ -25,6 +43,12 @@ const cookieSessionMiddleware = cookieSession({
 });
 
 app.use(csurf());
+
+app.use(function (req, res, next) {
+    res.cookie("mytoken", req.csrfToken());
+    next();
+});
+
 app.use(compression());
 
 
@@ -39,7 +63,8 @@ app.get("/home", (req, res) => {
     }
 });
 
-/*REGISTRAGION LOGIN RESET PASSWORD*/
+/////////*REGISTRAGION LOGIN RESET PASSWORD*////////////
+
 app.post("/home/registration", (req, res) => {
     const { first, last, email, password, status } = req.body;
     hash(password)
@@ -193,8 +218,27 @@ app.post("/home/reset-password/verify", (req, res) => {
 });
 
 
+/////////////////////*UPLOAD*////////////////////////
 
-// upload "https://s3.amazonaws.com/spicedling/"
+app.post("/upload", uploader.single("profile_pic"), s3.upload, (req, res) => {
+    console.log();
+    if (req.file) {
+        const url = `${s3Url}${req.session.userId}/${req.file.filename}`;
+        console.log("url", url);
+        db.editProfilePic(req.session.userId, url)
+            .then(() => {
+                res.json({ sucess: true, url: url });
+            })
+            .catch((error) => {
+                console.log("Error in editProfilePic: ", error);
+                res.json({ error: true });
+            });
+    } else {
+        res.json({ error: true });
+    }
+});
+
+
 
 //do not touch
 app.get("*", function (req, res) {

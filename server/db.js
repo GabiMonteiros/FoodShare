@@ -12,7 +12,7 @@ module.exports.addUser = (firstName, lastName, email, password, status) => {
     VALUES ($1, $2, $3, $4, $5)
     RETURNING id;
     `;
-    const params = [firstName, lastName, email, password];
+    const params = [firstName, lastName, email, password, status];
     return db.query(q, params);
 };
 
@@ -72,4 +72,4 @@ module.exports.editPassword = (email, password) => {
     return db.query(q, params);
 };
 
-
+/////////////////////////QUERY UPLOADER///////////////////////////
