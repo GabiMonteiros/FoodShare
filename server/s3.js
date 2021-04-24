@@ -5,7 +5,7 @@ let secrets;
 if (process.env.NODE_ENV == "production") {
     secrets = process.env; // in prod the secrets are environment variables
 } else {
-    secrets = require("./secrets"); // in dev they are in secrets.json which is listed in .gitignore
+    secrets = require("../secrets"); // in dev they are in secrets.json which is listed in .gitignore
 }
 
 const s3 = new aws.S3({
@@ -20,7 +20,7 @@ module.exports.upload = (req, res, next) => {
         .putObject({
             Bucket: "spicedling",
             ACL: "public-read",
-            Key: `${req.session.userId}/${filename}`,
+            Key: filename, //Key: `${req.session.userId}/${filename}`
             Body: fs.createReadStream(path),
             ContentType: mimetype,
             ContentLength: size,
@@ -39,35 +39,35 @@ module.exports.upload = (req, res, next) => {
         });
 };
 
-module.exports.delete = async function (id) {
-    try {
-        const { Contents } = await s3
-            .listObjectsV2({
-                Bucket: "spicedling",
-                Prefix: `${id}`,
-            })
-            .promise();
+// module.exports.delete = async function (id) {
+//     try {
+//         const { Contents } = await s3
+//             .listObjectsV2({
+//                 Bucket: "spicedling",
+//                 Prefix: `${id}`,
+//             })
+//             .promise();
 
-        if (Contents.length > 0) {
-            console.log("there is image here");
-            const toDelete = Contents.map((element) => {
-                return {
-                    Key: element.Key,
-                };
-            });
-            const { Deleted } = await s3
-                .deleteObjects({
-                    Bucket: "spicedling",
-                    Delete: {
-                        Objects: toDelete,
-                    },
-                })
-                .promise();
-            console.log("S3 delete objects worked", Deleted);
-        } else {
-            console.log("S3 no objects, but worked");
-        }
-    } catch (error) {
-        console.log("error in s3 delete", error);
-    }
-};
+//         if (Contents.length > 0) {
+//             console.log("there is image here");
+//             const toDelete = Contents.map((element) => {
+//                 return {
+//                     Key: element.Key,
+//                 };
+//             });
+//             const { Deleted } = await s3
+//                 .deleteObjects({
+//                     Bucket: "spicedling",
+//                     Delete: {
+//                         Objects: toDelete,
+//                     },
+//                 })
+//                 .promise();
+//             console.log("S3 delete objects worked", Deleted);
+//         } else {
+//             console.log("S3 no objects, but worked");
+//         }
+//     } catch (error) {
+//         console.log("error in s3 delete", error);
+//     }
+// };

@@ -6,13 +6,13 @@ const db = spicedPG(
 
 /////////////////////////QUERY REGISTER///////////////////////////
 
-module.exports.addUser = (firstName, lastName, email, password, status) => {
+module.exports.addUser = (first, last, email, password) => {
     const q = `
-    INSERT INTO users (first_name, last_name, email, password) 
-    VALUES ($1, $2, $3, $4, $5)
+    INSERT INTO users (first, last, email, password) 
+    VALUES ($1, $2, $3, $4)
     RETURNING id;
     `;
-    const params = [firstName, lastName, email, password, status];
+    const params = [first, last, email, password];
     return db.query(q, params);
 };
 

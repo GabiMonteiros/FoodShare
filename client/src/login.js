@@ -73,9 +73,9 @@ export default class Login extends Component {
                 <Link to="/registration">
                     <button className="sig-up submits">Sign Up</button>
                 </Link>
-                {/* <Link to="/reset-password">
+                <Link to="/reset-password">
                     <button className="frgt-pass submits">New Password?</button>
-                </Link> */}
+                </Link>
             </div>
         );
     }

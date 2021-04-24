@@ -1,23 +1,27 @@
-import Logo from "./logo";
+//import Logo from "./logo";
 import { Component } from "react";
-import axios from "./axios"
-// import { Link } from "react-router-dom";
+import axios from "./axios";
+import { Link } from "react-router-dom";
 
 //fazer uma route bio para donor
 //fazer uma route bio para distributor
 
+//oi@exemplo.com
 
 
 export default class Registration extends Component {
     constructor() {
         super();
         this.state = {
-            errors: false,
+            sucess: null,
+            error: false,
         };
     }
-
-    componentDidMount() {
-        console.log("mounted the registration page");
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value,
+        });
+        console.log(this.state);
     }
 
     handleClick(e) {
@@ -27,32 +31,29 @@ export default class Registration extends Component {
             !this.state.first ||
             !this.state.last ||
             !this.state.email ||
-            !this.state.password ||
-            !this.state.status
+            !this.state.password //||
+            // !this.state.location ||
+            // !this.state.status
         ) {
-            
-            console.log("posting");
-            axios
-                .post("/home/register", this.state)
-                .then(({ data }) => {
-                    console.log("response to post register", data);
+            return this.setState({
+                error: "Please fill out the form",
+            });
+        }    
+        axios
+            .post("/home/register", this.state)
+            .then(({ data }) => {
+                console.log("response to post register", data);
+                if (data.userId) {
+                    // redirecting the user to '/' route
                     location.replace("/");
-                })
-                .catch((err) => console.log("err in handleClick", err));
-        } else {
-            this.setState({ errors: true });
-        }
-    }
-
-    handleChange(e) {
-        this.setState(
-            {
-                [e.target.name]: e.target.value,
-                
-            }
-            
-        );
-        console.log(this.state);
+                } else {
+                    // conditionally render an error message - this means something went wrong
+                    this.setState({
+                        error: data.error,
+                    });
+                }
+            })
+            .catch((err) => console.log("err in post /register: ", err));
     }
 
     render() {
@@ -101,12 +102,18 @@ export default class Registration extends Component {
                         type="password"
                         required
                     />
-                    <input
-                        className="statusDonor"
-                        name="status"
-                        placeholder="Donor"
+                    {/* <input
+                        className="location"
+                        name="location"
+                        placeholder="location"
                         type="text"
                     />
+                    <input
+                        className="status"
+                        name="status"
+                        placeholder="Donor or Distributor"
+                        type="text"
+                    /> */}
 
                     <button
                         className="sig-up"
@@ -114,6 +121,10 @@ export default class Registration extends Component {
                     >
                         Sign Up
                     </button>
+                    <p>If you are already a member</p>
+                    <Link to="/login">
+                        <button className="log-in">Log In</button>
+                    </Link>
                 </div>
             </div>
         );

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-// import { IoBookmarkOutline, IoChatboxOutline } from "react-icons/io5";
+import Logo from "./logo";
+//import { IoBookmarkOutline, IoChatboxOutline } from "react-icons/io5";
 
 export default function Navigation() {
     return (
@@ -13,13 +14,13 @@ export default function Navigation() {
                     <li>
                         {/* to={"/users"}> */}
                         <Link className="" to={"/findonors"}>
-                            FindDonors
+                            Donors
                         </Link>{" "}
                     </li>
                     <li>
                         {/* to={"/users"}> */}
                         <Link className="" to={"/finddistributor"}>
-                            FindDistribuitors
+                            Distribuitors
                         </Link>{" "}
                     </li>
                     <li>
@@ -27,21 +28,23 @@ export default function Navigation() {
                             Connections
                         </Link>
                     </li>
-                    <li>
+                    {/* <li>
                         <Link to="/chat">
-                            <IoChatboxOutline className="icon" />
+                            <Chat className="icon" />
                         </Link>
-                    </li>
-                    <li>
-                        {/* <Link className="" to={"/logout"}>
+                    </li> */}
+                    {/* <li>
+                        <Link className="" to={"/logout"}>
                             Logout
-                        </Link> */}
-                    </li>
-                    <li>
-                        <Link to="/">
-                            <ProfilePic profile_pic={this.state.profile_pic} />
                         </Link>
-                    </li>
+                    </li> */}
+                    {/* <li>
+                        <Link to="/profile">
+
+                             deixando a foto  
+                            <Profile />
+                        </Link>
+                    </li>  */}
                 </ul>
             </nav>
         </header>
