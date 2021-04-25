@@ -12,7 +12,6 @@ import Profile from "./profile";
 // import Account from "./account"; //deleteaccount
 import { BrowserRouter, Route } from "react-router-dom";
 // import { Link } from "react-router-dom";
-import ProfilePic from "./profilepic";
 import Navigation from "./navagation";
 
 
@@ -72,7 +71,6 @@ export default class App extends Component {
        
 
         return (
-            
             <div id="app">
                 <BrowserRouter>
                     <>
@@ -86,13 +84,15 @@ export default class App extends Component {
                                     first={this.state.first}
                                     last={this.state.last}
                                     profile_pic={this.state.profile_pic}
+                                    adress={this.state.adress}
+                                    active={this.state.active}
                                     bio={this.state.bio}
                                     toggleUploader={() => this.toggleUploader()}
                                     setBio={(e) => this.setBio(e)}
                                 />
                             )}
                         />
-                        
+
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 profile_pic={this.state.profile_pic}

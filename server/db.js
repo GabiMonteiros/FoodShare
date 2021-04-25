@@ -6,13 +6,13 @@ const db = spicedPG(
 
 /////////////////////////QUERY REGISTER///////////////////////////
 
-module.exports.addUser = (first, last, email, password) => {
+module.exports.addUser = (first, last, email, password, adress, active) => {
     const q = `
-    INSERT INTO users (first, last, email, password) 
-    VALUES ($1, $2, $3, $4)
+    INSERT INTO users (first, last, email, password, adress, active) 
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING id;
     `;
-    const params = [first, last, email, password];
+    const params = [first, last, email, password, adress, active];
     return db.query(q, params);
 };
 
@@ -76,7 +76,7 @@ module.exports.editPassword = (email, password) => {
 
 module.exports.getUserProfile = (userId) => {
     const q = `
-        SELECT users.id, first, last, profile_pic, bio 
+        SELECT users.id, first, last, profile_pic, bio, adress, active 
         FROM users
         WHERE users.id = $1
         `;
@@ -92,5 +92,51 @@ module.exports.editProfilePic = (userId, url) => {
         RETURNING profile_pic;
         `;
     const params = [userId, url];
+    return db.query(q, params);
+};
+
+module.exports.getOtherUserProfile = (userId) => {
+    const q = `
+        SELECT id, first, last, email, bio, profile_pic,
+        FROM users
+        WHERE id = $1;
+        `;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+/////////////////////////BIO///////////////////////////
+
+module.exports.editBio = (userId, bio) => {
+    const q = `
+        UPDATE users 
+        SET bio=$2
+        WHERE id=$1;
+        `;
+    const params = [userId, bio];
+    return db.query(q, params);
+};
+
+/////////////////USERS/////////////////
+
+//checar no server se tem adress, active
+module.exports.getUsers = () => {
+    const q = `
+        SELECT id, first, last, bio, profile_pic, adress, active
+        FROM users
+        ORDER BY id DESC
+        LIMIT 3;
+        `;
+    return db.query(q);
+};
+
+module.exports.getMatchingPeople = (val) => {
+    const q = `
+        SELECT id, first, last, bio, profile_pic, adress, active
+        FROM users
+        WHERE first_name ILIKE $1 OR last_name ILIKE $1
+        LIMIT 4;
+        `;
+    const params = [val + "%"];
     return db.query(q, params);
 };

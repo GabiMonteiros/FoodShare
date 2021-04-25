@@ -31,9 +31,9 @@ export default class Registration extends Component {
             !this.state.first ||
             !this.state.last ||
             !this.state.email ||
-            !this.state.password //||
-            // !this.state.location ||
-            // !this.state.status
+            !this.state.password ||
+            !this.state.adress ||
+            !this.state.active
         ) {
             return this.setState({
                 error: "Please fill out the form",
@@ -102,18 +102,22 @@ export default class Registration extends Component {
                         type="password"
                         required
                     />
-                    {/* <input
-                        className="location"
-                        name="location"
-                        placeholder="location"
+                    <input
+                        onChange={(e) => this.handleChange(e)}
+                        className="adress"
+                        name="adress"
+                        placeholder="Location"
                         type="text"
+                        required
                     />
                     <input
-                        className="status"
-                        name="status"
+                        onChange={(e) => this.handleChange(e)}
+                        className="active"
+                        name="active"
                         placeholder="Donor or Distributor"
                         type="text"
-                    /> */}
+                        required
+                    />
 
                     <button
                         className="sig-up"

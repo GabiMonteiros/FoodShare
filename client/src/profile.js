@@ -1,5 +1,6 @@
-// import BioEditor from "./bioEditor";
+import BioEditor from "./bioEditor";
 import ProfilePic from "./profilepic";
+
 // import ToDoList from "./todo";
 // import Weather from "./weather";
 export default function Profile(props) {
@@ -10,12 +11,15 @@ export default function Profile(props) {
                 profile_pic={props.profile_pic}
             />
             <div className="bio-cropper">
-                <h3>{props.first} {props.last}</h3>
+                <h3>
+                    {props.first} {props.last}
+                </h3>
+
                 <p>
-                    hair and
-                     routine
+
+                    {props.adress}, {props.active}
                 </p>
-                {/* <BioEditor setBio={props.setBio} bio={props.bio} /> */}
+                <BioEditor setBio={props.setBio} bio={props.bio} />
             </div>
         </div>
     );

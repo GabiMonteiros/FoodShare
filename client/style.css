@@ -321,7 +321,7 @@ label {
         object-fit: contain;
         object-position: center;
         cursor: pointer;
-        border: 2px solid #2a293e;
+        border: 2px solid #57f05d;
         border-radius: 15px;
 }
 .profile-img:hover { /*movimento ao passar o hover mouse*/
@@ -332,11 +332,71 @@ label {
 }
 
 /* 
-$font-stack: 'Comfortaa', sans-serif;
-$font-title: 'Space Grotesk', serif;
+$font-stack: verdana ;
+$font-title: Reem Kufi ;
 $font-color: #2a293e;
 $bcg-color: #fff;
 $primary-color: #fe7bdb;
 $secundary-color: #95e5fe;
-$third-color: #8dffe8;
-$fourth-color: #fbfe4b; */
+$third-color: #8dffe8; meuu #fbfe4b
+$fourth-color: #fbfe4b; - #fbfe4b */
+
+ 
+.add-bio {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0)70%, #fbfe4b);
+    cursor: pointer;
+}
+.add-bio:hover {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0) 50%, #fbfe4b 50%);
+}
+.edit {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0)70%, #fe7bdb 30%);
+}
+.edit:hover {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0) 50%, #fe7bdb 50%);
+}
+.delete {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0)70%, #fbfe4b 30%);
+}
+.delete:hover {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0) 50%, #fbfe4b 50%);
+}
+
+.blue {
+    color: #95e5fe;
+    font-family: Reem Kufi;
+}
+.green {
+    color: #fbfe4b;
+    font-family: Reem Kufi;
+    margin-bottom: 0.1rem;
+} 
+
+textarea {
+    display: block;
+    margin-top: 2%;
+    padding: 15px;
+    width: 240px;
+    height: 150px;
+    outline: none;
+    border: 2px solid #2a293e;
+    border-radius: 15px;
+    resize: none;
+    color: #2a293e;
+    font-size: calc(0.6rem + 1vmin);
+    font-family: "Comfortaa";
+    transition: 0.2s linear;
+}
+textarea:focus {
+    transform: translateX(-10px);
+}
+
+/* 
+$font-stack: verdana ;
+$font-title: Reem Kufi ;
+$font-color: #2a293e;
+$bcg-color: #fff;
+$primary-color: #fe7bdb;
+$secundary-color: #95e5fe;
+$third-color: #8dffe8; meuu #fbfe4b
+$fourth-color: #fbfe4b; - #fbfe4b */

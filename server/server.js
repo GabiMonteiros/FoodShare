@@ -80,23 +80,27 @@ app.get("/home", (req, res) => {
 /////////*REGISTRAGION LOGIN RESET PASSWORD*////////////
 
 app.post("/home/registration", (req, res) => {
-    const { first, last, email, password } = req.body; //location, status
-    if (!first || !last || !email || !password) {
+    const { first, last, email, password, adress, active } = req.body; //location, status
+    if (!first || !last || !email || !password || !adress || !active) {
         return res.json({ error: true });
     }
     hash(password)
         .then((hashedPw) => {
-            db.addUser(first, last, email, hashedPw) //location, status
+            db.addUser(first, last, email, hashedPw, adress, active) //location, status
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
                     req.session.first = rows[0].first;
                     req.session.last = rows[0].last;
+                    req.session.adress = rows[0].adress;
+                    req.session.active = rows[0].active;
                     res.json({
                         success: true,
                         error: false,
                         userId: rows[0].id,
                         first: rows[0].first,
                         last: rows[0].last,
+                        adress: rows[0].adress,
+                        active: rows[0].active,
                     });
                 })
                 .catch((error) => {
@@ -251,6 +255,91 @@ app.post("/upload", uploader.single("profile_pic"), s3.upload, (req, res) => {
         res.json({ error: true });
     }
 });
+
+// app.post("/delete-profile-pic", s3.delete, (req, res) => {
+//     const newUrl = null;
+//     db.editProfilePic(req.session.userId, newUrl)
+//         .then(() => {
+//             res.json({ sucess: true, url: newUrl });
+//         })
+//         .catch((error) => {
+//             console.log("Error in delete-profile-pic: ", error);
+//             res.json({ error: true });
+//         });
+// });
+
+/*/////////////////BIO /////////////////*/
+app.post("/edit-bio", (req, res) => {
+    const { draftBio } = req.body;
+    db.editBio(req.session.userId, draftBio)
+        .then(() => {
+            res.json({
+                success: true,
+                bio: draftBio,
+            });
+        })
+        .catch((error) => {
+            console.log("error in editBio", error);
+            res.json({ error: true });
+        });
+});
+
+app.post("/delete-bio", (req, res) => {
+    const draftBio = null;
+    db.editBio(req.session.userId, draftBio)
+        .then(() => {
+            res.json({
+                success: true,
+                bio: draftBio,
+            });
+        })
+        .catch((error) => {
+            console.log("error in editBio", error);
+            res.json({ error: true });
+        });
+});
+
+//////////////////USERS/////////////////////////
+app.get("/member/:id", (req, res) => {
+    const { id } = req.params;
+    db.getUserProfile(id)
+        .then(({ rows }) => {
+            if (rows.length > 0) {
+                rows[0]["loggedId"] = req.session.userId;
+                rows[0].success = true;
+                res.json(rows[0]);
+            } else {
+                res.status(404);
+            }
+        })
+        .catch((error) => {
+            console.log("/member/:id error ", error);
+            res.json({ error: true });
+        });
+});
+
+app.get("/latest-users", (req, res) => {
+    db.getUsers()
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("/latest-users error ", error);
+            res.json({ error: true });
+        });
+});
+
+app.get("/find-users/:query", (req, res) => {
+    db.getMatchingPeople(req.params.query)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("/find-users/ error ", error);
+            res.json({ error: true });
+        });
+});
+
 
 
 

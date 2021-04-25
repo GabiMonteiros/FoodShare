@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import Welcome from "./welcome";
-//import Logo from "./logo";
+import Logo from "./logo";
 import App from "./app";
 
 let elem;
@@ -8,7 +8,7 @@ let elem;
 if (location.pathname === "/home") { //aqui tem q ser == /home
     elem = <Welcome />;
 } else {
-    
+    elem = <Logo />;
     elem = <App />;
 }
 
