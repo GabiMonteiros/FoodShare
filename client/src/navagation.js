@@ -23,6 +23,7 @@ export default function Navigation() {
                             Distribuitors
                         </Link>{" "}
                     </li>
+
                     <li>
                         <Link className="" to={"/connections"}>
                             Connections
@@ -32,7 +33,7 @@ export default function Navigation() {
                         <Link to="/chat">
                             <Chat className="icon" />
                         </Link>
-                    </li> */}
+                     {/*</li> */}
                     {/* <li>
                         <Link className="" to={"/logout"}>
                             Logout

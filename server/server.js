@@ -3,34 +3,35 @@ const app = express();
 const compression = require("compression");
 const path = require("path");
 const cookieSession = require("cookie-session");
+const csurf = require("csurf");
 const db = require("./db");
 const { hash, compare } = require("./bc"); 
-const csurf = require("csurf");
+
 const cryptoRandomString = require("crypto-random-string");
 const { sendEmail } = require("./ses");
-// const multer = require("multer");
-// const uidSafe = require("uid-safe");
-// const s3 = require("./s3");
-// const { s3Url } = require("../config.json");
+const multer = require("multer");
+const uidSafe = require("uid-safe");
+const s3 = require("./s3");
+const { s3Url } = require("../config.json");
 
 
-// const diskStorage = multer.diskStorage({
-//     destination: function (req, file, callback) {
-//         callback(null, __dirname + "/uploads");
-//     },
-//     filename: function (req, file, callback) {
-//         uidSafe(24).then(function (uid) {
-//             callback(null, uid + path.extname(file.originalname));
-//         });
-//     },
-// });
+const diskStorage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, __dirname + "/uploads");
+    },
+    filename: function (req, file, callback) {
+        uidSafe(24).then(function (uid) {
+            callback(null, uid + path.extname(file.originalname));
+        });
+    },
+});
 
-// const uploader = multer({
-//     storage: diskStorage,
-//     limits: {
-//         fileSize: 2097152,
-//     },
-// });
+const uploader = multer({
+    storage: diskStorage,
+    limits: {
+        fileSize: 2097152,
+    },
+});
 
 // let secret;
 // process.env.NODE_ENV === "production"
@@ -53,6 +54,8 @@ const cookieSessionMiddleware = cookieSession({
 
 app.use(cookieSessionMiddleware);
 
+//ficar atenta ao combo de csurf segurança 
+app.use(express.urlencoded({ extended: false }));
 app.use(csurf());
 
 app.use(function (req, res, next) {
@@ -75,9 +78,6 @@ app.get("/home", (req, res) => {
 });
 
 /////////*REGISTRAGION LOGIN RESET PASSWORD*////////////
-
-
-
 
 app.post("/home/registration", (req, res) => {
     const { first, last, email, password } = req.body; //location, status
@@ -219,7 +219,7 @@ app.post("/home/reset-password/verify", (req, res) => {
         });
 });
 
-////////////////////////////
+//////////////////////////// PROFILE//////////////////
 app.get("/profile.json", (req, res) => {
     db.getUserProfile(req.session.userId)
         .then(({ rows }) => {
@@ -234,23 +234,23 @@ app.get("/profile.json", (req, res) => {
 
 /////////////////////*UPLOAD*////////////////////////
 
-// app.post("/upload", uploader.single("profile_pic"), s3.upload, (req, res) => {
-//     console.log();
-//    let url = s3Url + req.file.filename;
-//     if (req.file) {
-//         console.log("url", url);
-//         db.editProfilePic(req.session.userId, url)
-//             .then(() => {
-//                 res.json({ sucess: true, url: url });
-//             })
-//             .catch((error) => {
-//                 console.log("Error in editProfilePic: ", error);
-//                 res.json({ error: true });
-//             });
-//     } else {
-//         res.json({ error: true });
-//     }
-// });
+app.post("/upload", uploader.single("profile_pic"), s3.upload, (req, res) => {
+    console.log();
+    let url = s3Url + req.file.filename;
+    if (req.file) {
+        console.log("url", url);
+        db.editProfilePic(req.session.userId, url)
+            .then(() => {
+                res.json({ sucess: true, url: url });
+            })
+            .catch((error) => {
+                console.log("Error in editProfilePic: ", error);
+                res.json({ error: true });
+            });
+    } else {
+        res.json({ error: true });
+    }
+});
 
 
 

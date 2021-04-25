@@ -4,7 +4,7 @@ import Home from "./home.js";
 import Logo from "./logo";
 import Registration from "./registration.js";
 import Login from "./login.js";
-// import ResetPassword from "./reset.js";
+import ResetPassword from "./reset.js";
 import { Link } from "react-router-dom";
 
 
@@ -33,7 +33,9 @@ export default function Welcome() {
                         <Link to="/">
                             <Logo />
                         </Link>
-                        <h1 className="nav">Food Share</h1>
+                        <Link to="/">
+                            <h1 className="nav">Food Share</h1>
+                        </Link>    
                         <nav>
                             <ul>
                                 <li>
@@ -52,7 +54,7 @@ export default function Welcome() {
                     <Route exact path="/" component={Home} />
                     <Route path="/registration" component={Registration} />
                     <Route path="/login" component={Login} />
-                    {/* <Route path="/reset-password" component={ResetPassword} />  */}
+                    <Route path="/reset-password" component={ResetPassword} />
                 </>
             </HashRouter>
         </>

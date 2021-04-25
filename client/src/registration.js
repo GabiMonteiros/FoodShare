@@ -40,7 +40,7 @@ export default class Registration extends Component {
             });
         }    
         axios
-            .post("/home/register", this.state)
+            .post("/home/registration", this.state) //mesma route aqui e no server
             .then(({ data }) => {
                 console.log("response to post register", data);
                 if (data.userId) {
@@ -53,7 +53,7 @@ export default class Registration extends Component {
                     });
                 }
             })
-            .catch((err) => console.log("err in post /register: ", err));
+            .catch((err) => console.log("err in post /registration: ", err));
     }
 
     render() {

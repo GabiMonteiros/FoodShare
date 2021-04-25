@@ -73,3 +73,24 @@ module.exports.editPassword = (email, password) => {
 };
 
 /////////////////////////QUERY UPLOADER///////////////////////////
+
+module.exports.getUserProfile = (userId) => {
+    const q = `
+        SELECT users.id, first, last, profile_pic, bio 
+        FROM users
+        WHERE users.id = $1
+        `;
+    const params = [userId];
+    return db.query(q, params);
+};
+
+module.exports.editProfilePic = (userId, url) => {
+    const q = `
+        UPDATE users 
+        SET profile_pic=$2
+        WHERE id=$1
+        RETURNING profile_pic;
+        `;
+    const params = [userId, url];
+    return db.query(q, params);
+};

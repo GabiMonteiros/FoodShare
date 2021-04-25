@@ -4,7 +4,7 @@ export default function ProfilePic({first,last,profile_pic,toggleUploader,}) {
             <img
                 onClick={() => toggleUploader()}
                 className="profile-img"
-                src={profile_pic || "../default-img.png"}
+                src={profile_pic || "../default-img-svg.png"}
                 alt={`${first} ${last}`}
             />
         </>
