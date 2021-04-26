@@ -19,9 +19,11 @@ export default class OtherProfile extends Component {
     }
 
     componentDidMount() {
+        console.log("otherprofile: ", this.props.match.params.id);
         axios
-            .get("/user/" + this.props.match.params.id)
+            .get("/api/user/" + this.props.match.params.id)//essa route tem q ser igual ao do server, mas nao pode ser igual ao app
             .then(({ data }) => {
+                console.log("log id: ", data);
                 if (this.props.match.params.id == data.loggedId) {
                     this.props.history.push("/");
                 } else {
@@ -56,9 +58,16 @@ export default class OtherProfile extends Component {
                     />
                 </div>
                 <div className="bio-cropper">
-                    <h5>
+                    <h3>
                         {this.state.first} {this.state.last}
-                    </h5>
+                        <br></br>
+                    </h3>
+                    <h4>
+                        <b>
+                            {this.state.adress}, {this.state.active}
+                        </b>
+                    </h4>
+
                     <p>{this.state.bio}</p>
                 </div>
                 {/* <FriendButton

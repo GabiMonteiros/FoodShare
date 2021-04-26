@@ -96,9 +96,6 @@ export default class App extends Component {
                                 />
                             )}
                         />
-
-                       
-
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 profile_pic={this.state.profile_pic}
@@ -106,6 +103,8 @@ export default class App extends Component {
                                 toggleUploader={() => this.toggleUploader()}
                             />
                         )}
+                        {/* essa é a route q aparece para o user, tem q ser
+                        diferente do que ta em server ou em component */}
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/users" component={FindPeople} />
                         {/* <Route path="/finddonors/" component={FindDonors} /> */}

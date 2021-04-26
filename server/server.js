@@ -256,17 +256,7 @@ app.post("/upload", uploader.single("profile_pic"), s3.upload, (req, res) => {
     }
 });
 
-// app.post("/delete-profile-pic", s3.delete, (req, res) => {
-//     const newUrl = null;
-//     db.editProfilePic(req.session.userId, newUrl)
-//         .then(() => {
-//             res.json({ sucess: true, url: newUrl });
-//         })
-//         .catch((error) => {
-//             console.log("Error in delete-profile-pic: ", error);
-//             res.json({ error: true });
-//         });
-// });
+
 
 /*/////////////////BIO /////////////////*/
 app.post("/edit-bio", (req, res) => {
@@ -300,7 +290,8 @@ app.post("/delete-bio", (req, res) => {
 });
 
 //////////////////USERS/////////////////////////
-app.get("/user/:id.json", (req, res) => { //tem q botar o .json para renderizar o other profile 
+app.get("/api/user/:id", (req, res) => {
+    //tem q botar o /api  para renderizar o other profile com nome e bio
     const { id } = req.params;
     db.getUserProfile(id)
         .then(({ rows }) => {
