@@ -5,13 +5,15 @@
 
 body {
     box-sizing: border-box;
-    margin: 0;
+    margin: 2vh 2vw;;
     font: 100% Verdana ;
-    background-color: #fff;
+    background-color: ghostwhite;
     color: #2a293e;
     font-size: 1rem;
     
 }
+
+
 
 /* MUDAR A FONT TITULO */
 
@@ -39,7 +41,7 @@ header {
     margin: 0;
     padding: 1.5vw 3vw;
     height: 6vh;
-    background-color: #fff;
+    background-color: ghostwhite;
     z-index: 10;
     
     
@@ -156,7 +158,7 @@ h2{
 
 .welcome3,
     h2 {
-    color:#57f05d;;
+    color:#57f05d;
 }
 
 
@@ -170,7 +172,7 @@ h2{
     width: 28.125rem;
     height: auto;
     min-height: 500px;
-    background-color: #fff;
+    background-color: ghostwhite;
     border-radius: 15px;
     border: 2px solid #b9b7c9;
 }
@@ -417,7 +419,7 @@ textarea:focus {
 .findPeople .profile-img:hover {
   box-shadow: none;
 } 
-.profile-img-other, .img-wrapper, 
+.profile-img-other,  
 .findPeople .img-wrapper {
   position: relative;
   border-radius: 50%;
@@ -425,6 +427,7 @@ textarea:focus {
   height: 200px;
   transition: 1s box-shadow;
   background-color: ghostwhite;
+  border: 2px solid #57f05d;
 }
 
  
@@ -440,9 +443,19 @@ textarea:focus {
   transition: 1s box-shadow;
   background-color: ghostwhite;
 }
+h2 , f
 
 .findPeople .img-wrapper:hover {
   box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+}
+.users-bio {
+    margin: 1vh 2vw;
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 30%  1fr 30%;
+    grid-template-rows: 32%  1fr;
+    grid-gap: 2vw;
 }
 
 /* .other .bio-cropper{

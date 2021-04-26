@@ -1,81 +1,82 @@
+
 import { useState, useEffect } from "react";
 import axios from "./axios";
 import { Link } from "react-router-dom";
 
 export default function FindPeople() {
-    const [query, setQuery] = useState("");
     const [users, setUsers] = useState([]);
+    // console.log(users, "this is my array of users");
+    const [searchusers, setSearchUsers] = useState();
+    console.log(searchusers, "this is mu searchusers");
 
     const handleChange = (e) => {
-        setQuery(e.target.value);
+        console.log("e.target.value", e.target.value);
+        setSearchUsers(e.target.value);
     };
-
-
     useEffect(() => {
-        console.log(`Console log happening in useEffect`);
-        let abort;
+        if (!searchusers) {
+            axios.get("/lastthreeusers").then((res) => {
+                console.log("component mounted");
+                console.log(
+                    "this is my response data after the app component mounted, it contains the user information from GET /user route",
+                    res.data
+                );
+                console.log("this is my data", res.data);
 
-        (async () => {
-            if (!query) {
-                const { data } = await axios.get("/latest-users");
-                if (!abort) {
-                    setUsers(data);
-                    console.log("data in find people", data);
-                }
-            } else {
-                const { data } = await axios.get("/find-users/" + query);
-                if (!abort) {
-                    setUsers(data);
-                    console.log("data in find people", data);
-                }
-            }
-        })();
+                setUsers(res.data);
+                console.log("hi i am your users", users);
+            });
+        } else {
+            axios.get(`/users/${searchusers}`).then((res) => {
+                console.log("component mounted");
 
-        return () => {
-            console.log(`About to replace ${query} with`);
-            abort = true;
-        };
-    }, [query]);
+                console.log("this is my data", res.data);
 
-    
+                setUsers(res.data);
+                console.log("hi i am your users", users);
+            });
+        }
+    }, [searchusers]);
 
     return (
         <div className="findPeople">
-            <h2>Find People</h2>
-            {/* <p>Checkout who just joined!</p>
-            <p>Are you looking for someone in particular? </p> */}
+            <br></br>
+            <p>Find Connections</p>
+            <br></br> <br></br>
+            <h3>Find Connections</h3>
+            <p>Are you looking for a new partner to fight hunger? </p>
             <div className="search-box">
                 <input
+                    type="text"
+                    placeholder="search for a new connection"
+                    className="searchInput"
                     onChange={handleChange}
-                    className="search-input"
-                    name="search"
                 />
             </div>
-            <div>
-                {users.map((users, idx) => (
-                    <div key={idx} className="users">
-                        <Link
-                            to={"/user/" + users.id}
-                            className="searchedUsers"
-                        >
-                            <div className="img-wrapper">
-                                <img
-                                    src={
-                                        users.profile_pic ||
-                                        "../default-img-svg.png"
-                                    }
-                                    alt={`${this.state.first} ${this.state.last}`}
-                                    className="profile-img-other"
-                                ></img>
-                            </div>
-                            <p>
-                                <b>{users.first} {users.last}</b>
-                            </p>
-                        </Link>
+            {users.map((user) => (
+                <div className="users" key={user.id}>
+                    <Link to={"/user/" + user.id} className="searchedUsers">
+                        <div className="">
+                            <img
+                                className="profile-img-other"
+                                src={
+                                    user.profile_pic || "../default-img-svg.png"
+                                }
+                            />
+                        </div>
+                    </Link>
+                    <div className="users-bio">
+                        <p>
+                            <b>
+                                {user.first} {user.last} <br></br>
+                                {user.adress}, {user.active}
+                            </b>
+                        </p>
                     </div>
-                ))}
-                {!users.length && query && <p>Nothing found</p>}
-            </div>
+                </div>
+            ))}
         </div>
     );
 }
+
+

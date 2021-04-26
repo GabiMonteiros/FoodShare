@@ -96,6 +96,7 @@ export default class App extends Component {
                                 />
                             )}
                         />
+                      
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 profile_pic={this.state.profile_pic}

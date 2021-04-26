@@ -309,7 +309,7 @@ app.get("/api/user/:id", (req, res) => {
         });
 });
 
-app.get("/latest-users", (req, res) => {
+app.get("/lastthreeusers", (req, res) => {
     db.getUsers()
         .then(({ rows }) => {
             res.json(rows);
@@ -320,7 +320,7 @@ app.get("/latest-users", (req, res) => {
         });
 });
 
-app.get("/find-users/:query", (req, res) => {
+app.get("/users/:searchusers", (req, res) => {
     db.getMatchingPeople(req.params.query)
         .then(({ rows }) => {
             res.json(rows);

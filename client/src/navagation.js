@@ -5,7 +5,7 @@ import Logo from "./logo";
 export default function Navigation() {
     return (
         <header>
-            <Link to="/home#/">
+            <Link to="/home">
                 <Logo />
             </Link>
             <h1 className="nav">Food Share</h1>
@@ -25,11 +25,11 @@ export default function Navigation() {
                     </li>
 
                     <li>
-                        <Link className="" to={"/connections"}>
+                        <Link className="" to={"/users"}>
                             Connections
                         </Link>
                     </li>
-                    
+
                     {/* <li>
                         <Link to="/chat">
                             <Chat className="icon" />
