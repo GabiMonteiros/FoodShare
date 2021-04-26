@@ -45,7 +45,7 @@ header {
     
 }
 
- .profile-img {
+ .profile-img-header{
     border-radius: 50% 50% 0 50%;
     height: 45px;
     width: 45px;
@@ -315,16 +315,16 @@ label {
     grid-gap: 2vw;
 }
 
-.profile-img {
-        height: 18rem;
-        width: 19rem;
-        object-fit: contain;
-        object-position: center;
-        cursor: pointer;
-        border: 2px solid #57f05d;
-        border-radius: 15px;
+.profile-img, .findPeople .img-wrapper {
+    height: 18rem;
+    width: 19rem;
+    object-fit: contain;
+    object-position: center;
+    cursor: pointer;
+    border: 2px solid #57f05d;
+    border-radius: 15px;
 }
-.profile-img:hover { /*movimento ao passar o hover mouse*/
+.profile-img:hover , .findPeople .img-wrapper:hover { /*movimento ao passar o hover mouse*/
     transform: matrix(1, 0, 0, 1, 7, 7);
     transition: transform 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.275) 0s, 
         -webkit-transform 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.275) 0s, 
@@ -389,6 +389,58 @@ textarea {
 }
 textarea:focus {
     transform: translateX(-10px);
+}
+
+
+/*////////////OTHER PROFI//////////////////*/
+
+
+.profile-img-other{
+  cursor: default;
+}
+.profile-img-other{
+    transform: matrix(1, 0, 0, 1, 7, 7);
+    transition: transform 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.275) 0s, 
+        -webkit-transform 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.275) 0s, 
+        transform 0.4s cubic-bezier(0.17, 0.89, 0.32, 1.275) 0s;
+
+}
+
+.profile .profile-img:hover,
+.findPeople .profile-img:hover {
+  box-shadow: none;
+} 
+.profile-img-other, .img-wrapper, 
+.findPeople .img-wrapper {
+  position: relative;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  transition: 1s box-shadow;
+  background-color: ghostwhite;
+}
+
+ 
+.findPeople .img-wrapper:hover {
+  box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+}
+
+.findPeople .img-wrapper {
+  position: relative;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  transition: 1s box-shadow;
+  background-color: ghostwhite;
+}
+
+.findPeople .img-wrapper:hover {
+  box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);
+}
+
+.other .bio-cropper{
+    text-align: center;
+    border: 2px solid #57f05d;
 }
 
 /* 

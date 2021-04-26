@@ -14,7 +14,7 @@ const uidSafe = require("uid-safe");
 const s3 = require("./s3");
 const { s3Url } = require("../config.json");
 
-
+//uploader
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
@@ -300,7 +300,7 @@ app.post("/delete-bio", (req, res) => {
 });
 
 //////////////////USERS/////////////////////////
-app.get("/member/:id", (req, res) => {
+app.get("/user/:id.json", (req, res) => { //tem q botar o .json para renderizar o other profile 
     const { id } = req.params;
     db.getUserProfile(id)
         .then(({ rows }) => {
@@ -313,7 +313,7 @@ app.get("/member/:id", (req, res) => {
             }
         })
         .catch((error) => {
-            console.log("/member/:id error ", error);
+            console.log("/user/:id error ", error);
             res.json({ error: true });
         });
 });

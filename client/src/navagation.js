@@ -29,6 +29,7 @@ export default function Navigation() {
                             Connections
                         </Link>
                     </li>
+                    
                     {/* <li>
                         <Link to="/chat">
                             <Chat className="icon" />
@@ -42,8 +43,10 @@ export default function Navigation() {
                     {/* <li>
                         <Link to="/profile">
 
-                             deixando a foto  
-                            <Profile />
+                            <ProfilePic
+                                toggleUploader={props.toggleUploader}
+                                profile_pic={props.profile_pic}
+                            />
                         </Link>
                     </li>  */}
                 </ul>

@@ -106,7 +106,7 @@ export default class Registration extends Component {
                         onChange={(e) => this.handleChange(e)}
                         className="adress"
                         name="adress"
-                        placeholder="Location"
+                        placeholder="City"
                         type="text"
                         required
                     />

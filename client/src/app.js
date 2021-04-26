@@ -1,9 +1,11 @@
 import { Component } from "react";
-import axios from "./axios";
-import Uploader from "./uploader";
-import Profile from "./profile";
+import axios from "./axios.js";
+import Uploader from "./uploader.js";
+import Profile from "./profile.js";
+//import ProfilePic from "./profilepic";
 //import Logo from "./logo";
-// import OtherProfile from "./other-profile";
+import OtherProfile from "./otherporfile.js";
+import FindPeople from "./findPeople";
 //import CollaborativeNetwork from "./collaborativenetwork"; //findpeople
 // import FindDonors from "./finddonors";
 // import FindDistributor from "./finddistributor";
@@ -12,7 +14,7 @@ import Profile from "./profile";
 // import Account from "./account"; //deleteaccount
 import { BrowserRouter, Route } from "react-router-dom";
 // import { Link } from "react-router-dom";
-import Navigation from "./navagation";
+import Navigation from "./navagation.js";
 
 
 export default class App extends Component {
@@ -22,9 +24,9 @@ export default class App extends Component {
             id: "",
             first: "",
             last: "",
+            email: "",
             bio: "",
             uploaderIsVisible: false,
-            
         };
     }
 
@@ -39,13 +41,7 @@ export default class App extends Component {
                 console.log("error", error);
             });
     }
-    handleScroll() {
-        if (window.scrollY > 20) {
-            document.querySelector("header").className = "scroll";
-        } else {
-            document.querySelector("header").className = "";
-        }
-    }
+    
 
     toggleUploader() {
         this.setState({
@@ -75,10 +71,18 @@ export default class App extends Component {
                 <BrowserRouter>
                     <>
                         <Navigation />
+                        {/* PENSAR A LOCALIZACAO
+                        <div className="profile-img-header">
+                            <ProfilePic
+                                {...this.state.user}
+                                showUploader={() => this.showUploader()}
+                            />
+                        </div> */}
                         <Route
                             exact
                             path="/"
                             render={() => (
+                                // tem q colocar tudo q quer q acapreça na bio
                                 <Profile
                                     id={this.state.id}
                                     first={this.state.first}
@@ -93,6 +97,8 @@ export default class App extends Component {
                             )}
                         />
 
+                       
+
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 profile_pic={this.state.profile_pic}
@@ -100,6 +106,8 @@ export default class App extends Component {
                                 toggleUploader={() => this.toggleUploader()}
                             />
                         )}
+                        <Route path="/user/:id" component={OtherProfile} />
+                        <Route path="/users" component={FindPeople} />
                         {/* <Route path="/finddonors/" component={FindDonors} /> */}
                         {/* <Route path="/findfinddistributor/"component={FindDistributor}/> */}
                         {/* <Route path="/connections/" component={connections} />*/}

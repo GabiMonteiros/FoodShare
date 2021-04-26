@@ -97,7 +97,7 @@ module.exports.editProfilePic = (userId, url) => {
 
 module.exports.getOtherUserProfile = (userId) => {
     const q = `
-        SELECT id, first, last, email, bio, profile_pic,
+        SELECT id, first, last, email, bio, profile_pic, adress, active
         FROM users
         WHERE id = $1;
         `;

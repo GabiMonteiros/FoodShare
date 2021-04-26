@@ -1,12 +1,11 @@
 import BioEditor from "./bioEditor";
 import ProfilePic from "./profilepic";
 
-// import ToDoList from "./todo";
-// import Weather from "./weather";
+//  TUDO Q APARECE NO PERFIL
 export default function Profile(props) {
     return (
         <div className="profile">
-            <ProfilePic
+            <ProfilePic 
                 toggleUploader={props.toggleUploader}
                 profile_pic={props.profile_pic}
             />
@@ -16,8 +15,7 @@ export default function Profile(props) {
                 </h3>
 
                 <p>
-
-                    {props.adress}, {props.active}
+                    <b>{props.adress}, {props.active}</b>
                 </p>
                 <BioEditor setBio={props.setBio} bio={props.bio} />
             </div>
