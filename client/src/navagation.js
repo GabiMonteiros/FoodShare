@@ -5,7 +5,7 @@ import Logo from "./logo";
 export default function Navigation() {
     return (
         <header>
-            <Link to="/home">
+            <Link to="/welcome">
                 <Logo />
             </Link>
             <h1 className="nav">Food Share</h1>

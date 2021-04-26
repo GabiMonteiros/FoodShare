@@ -140,3 +140,61 @@ module.exports.getMatchingPeople = (val) => {
     const params = [val + "%"];
     return db.query(q, params);
 };
+
+/////////////////////FRIENDSHIP///////////////////////////
+
+module.exports.getFriendshipsStatus = (userId, otherUserId) => {
+    const q = `
+        SELECT * 
+        FROM friendships
+        WHERE (recipient_id = $1 AND sender_id = $2) 
+            OR (recipient_id = $2 AND sender_id = $1);
+        `;
+    const params = [userId, otherUserId];
+    return db.query(q, params);
+};
+
+module.exports.makeRequest = (userId, otherUserId) => {
+    const q = `
+        INSERT INTO friendships (sender_id, recipient_id)
+        VALUES ($1, $2)
+        RETURNING sender_id, recipient_id, accepted;
+        `;
+    const params = [userId, otherUserId];
+    return db.query(q, params);
+};
+
+module.exports.cancelRequest = (userId, otherUserId) => {
+    const q = `
+        DELETE
+        FROM friendships 
+        WHERE (recipient_id = $1 AND sender_id = $2) 
+            OR (recipient_id = $2 AND sender_id = $1);
+        `;
+    const params = [userId, otherUserId];
+    return db.query(q, params);
+};
+
+module.exports.acceptRequest = (userId, otherUserId) => {
+    const q = `
+        UPDATE friendships
+        SET accepted = 'true' 
+        WHERE (recipient_id = $1 AND sender_id = $2) 
+            OR (recipient_id = $2 AND sender_id = $1);
+        `;
+    const params = [userId, otherUserId];
+    return db.query(q, params);
+};
+
+module.exports.getFriendsWannabes = (userId) => {
+    const q = `
+        SELECT users.id, first, last, profile_pic, adress, active, accepted
+        FROM friendships
+        JOIN users
+        ON (accepted = false AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND recipient_id = $1 AND sender_id = users.id)
+        OR (accepted = true AND sender_id = $1 AND recipient_id = users.id);
+        `;
+    const params = [userId];
+    return db.query(q, params);
+};

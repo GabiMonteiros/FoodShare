@@ -7,7 +7,7 @@ body {
     box-sizing: border-box;
     margin: 2vh 2vw;;
     font: 100% Verdana ;
-    background-color: ghostwhite;
+    background-color: #fff;;
     color: #2a293e;
     font-size: 1rem;
     
@@ -41,7 +41,7 @@ header {
     margin: 0;
     padding: 1.5vw 3vw;
     height: 6vh;
-    background-color: ghostwhite;
+    background-color: #fff;;
     z-index: 10;
     
     
@@ -60,7 +60,7 @@ header {
 
 /* SUBLINADO QND SCROLL NAV */
 .scroll {
-    box-shadow: 0 8px 4px -8px #57f05d;
+    box-shadow: 0 8px 6px -6px #57f05d;
 }
 
 .logo {
@@ -159,6 +159,7 @@ h2{
 .welcome3,
     h2 {
     color:#57f05d;
+    
 }
 
 
@@ -172,7 +173,7 @@ h2{
     width: 28.125rem;
     height: auto;
     min-height: 500px;
-    background-color: ghostwhite;
+    background-color: #fff;
     border-radius: 15px;
     border: 2px solid #b9b7c9;
 }
@@ -317,6 +318,24 @@ label {
     grid-gap: 2vw;
 }
 
+ .bio-cropper-other {
+   margin: 15vh 5vw;
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 30%  1fr 30%;
+    grid-template-rows: 32%  1fr;
+    grid-gap: 2vw;
+}
+/*
+ margin: 15vh 5vw;
+    flex-grow: 1;
+    position: relative;
+    display: grid;
+    grid-template-columns: 19%  1fr 30%;
+    grid-template-rows: 32%  1fr;
+    grid-gap: 2vw;
+ */
 .profile-img {
     height: 18rem;
     width: 19rem;
@@ -443,7 +462,7 @@ textarea:focus {
   transition: 1s box-shadow;
   background-color: ghostwhite;
 }
-h2 , f
+
 
 .findPeople .img-wrapper:hover {
   box-shadow: 0 5px 35px 0px rgba(0,0,0,.1);

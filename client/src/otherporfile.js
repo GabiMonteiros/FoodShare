@@ -1,6 +1,6 @@
 import { Component } from "react";
 import axios from "./axios";
-// import FriendButton from "./friendButton";
+import FriendButton from "./friendButton";
 
 export default class OtherProfile extends Component {
     constructor() {
@@ -70,10 +70,10 @@ export default class OtherProfile extends Component {
 
                     <p>{this.state.bio}</p>
                 </div>
-                {/* <FriendButton
+                <FriendButton
                     otherUserId={this.state.otherUserId}
                     userId={this.state.userId}
-                /> */}
+                />
             </div>
         );
     }

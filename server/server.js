@@ -290,6 +290,7 @@ app.post("/delete-bio", (req, res) => {
 });
 
 //////////////////USERS/////////////////////////
+
 app.get("/api/user/:id", (req, res) => {
     //tem q botar o /api  para renderizar o other profile com nome e bio
     const { id } = req.params;
@@ -331,6 +332,62 @@ app.get("/users/:searchusers", (req, res) => {
         });
 });
 
+////////////////////////////FRIENDSHIP/////////////////
+
+app.get("/friendship-status/:otherUserId", (req, res) => {
+    const { otherUserId } = req.params;
+    db.getFriendshipsStatus(req.session.userId, otherUserId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("/getFriendshipsStatus ", error);
+            res.json({ error: true });
+        });
+});
+
+app.post("/friendship-action", (req, res) => {
+    const { action, otherUserId } = req.body;
+    if (action === "Make friend request") {
+        db.makeRequest(req.session.userId, otherUserId)
+            .then(({ rows }) => {
+                res.json(rows);
+            })
+            .catch((error) => {
+                console.log("error in makeRequest", error);
+                res.json({ error: true });
+            });
+    } else if (action === "Cancel friend request" || action === "Unfriend") {
+        db.cancelRequest(req.session.userId, otherUserId)
+            .then(({ rows }) => {
+                res.json(rows);
+            })
+            .catch((error) => {
+                console.log("error in cancelRequest", error);
+                res.json({ error: true });
+            });
+    } else if (action === "Accept friend request") {
+        db.acceptRequest(req.session.userId, otherUserId)
+            .then(({ rows }) => {
+                res.json(rows);
+            })
+            .catch((error) => {
+                console.log("error in acceptRequest", error);
+                res.json({ error: true });
+            });
+    }
+});
+
+app.get("/friends-wannabes", (req, res) => {
+    db.getFriendsWannabes(req.session.userId)
+        .then(({ rows }) => {
+            res.json(rows);
+        })
+        .catch((error) => {
+            console.log("/getFriendsWannabes ", error);
+            res.json({ error: true });
+        });
+});
 
 
 
