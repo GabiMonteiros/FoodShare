@@ -7,6 +7,8 @@ import Profile from "./profile.js";
 import OtherProfile from "./otherporfile.js";
 import FindPeople from "./findPeople";
 import Friends from "./friends";
+import Onlineusers from "./onlineUsers";
+import Chat from "./chat";
 //import CollaborativeNetwork from "./collaborativenetwork"; //findpeople
 // import FindDonors from "./finddonors";
 // import FindDistributor from "./finddistributor";
@@ -110,6 +112,8 @@ export default class App extends Component {
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/users" component={FindPeople} />
                         <Route path="/connections" component={Friends} />
+                        <Route path="/chat" component={Chat} />
+                        <Route path="/onlineusers" component={Onlineusers} />
                         {/* <Route path="/finddonors/" component={FindDonors} /> */}
                         {/* <Route path="/findfinddistributor/"component={FindDistributor}/> */}
                         {/* <Route path="/connections/" component={connections} />*/}

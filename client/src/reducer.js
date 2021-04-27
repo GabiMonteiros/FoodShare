@@ -30,29 +30,56 @@ export default function reducer(state = {}, action) {
         };
     }
 
-    // if (action.type == "GET_MESSAGES") {
-    //     state = {
-    //         ...state,
-    //         chatMessages: action.messagesList,
-    //     };
-    // }
+    if (action.type == "GET_MESSAGES") {
+        state = {
+            ...state,
+            messages: action.messages,
+        };
+    }
 
-    // if (action.type == "POST_MESSAGES") {
-    //     state = {
-    //         ...state,
-    //         chatMessages: [action.message, ...state.chatMessages],
-    //     };
-    // }
+    if (action.type == "GET_MESSAGE") {
+        state = {
+            ...state,
+            messages: [...state.messages, action.message],
+        };
+    }
 
-    // if (action.type == "DELETE_MESSAGE") {
-    //     console.log("actino", action);
-    //     state = {
-    //         ...state,
-    //         chatMessages: state.chatMessages.filter((deletedMsg) => {
-    //             return deletedMsg.id != action.msgId;
-    //         }),
-    //     };
-    // }
+    if (action.type == "GET_ONLINE_USERS") {
+        state = {
+            ...state,
+            onlineUsers: action.onlineUsers,
+        };
+    }
+
+    if (action.type == "USER_LEFT") {
+        console.log("onlineusers state: ", state.onlineUsers);
+        console.log(
+            "onlineusers state filter: ",
+            state.onlineUsers.filter((user) => user.id != action.userLeft)
+        );
+        state = {
+            ...state,
+            onlineUsers: state.onlineUsers.filter(
+                (user) => user.id != action.userLeft
+            ),
+        };
+    }
+
+    if (action.type == "PRIVATE_CHAT_MESSAGES") {
+        state = {
+            ...state,
+            privateChatMessages: action.chatMessages,
+        };
+    }
+    if (action.type == "PRIVATE_CHAT_MESSAGE") {
+        state = {
+            ...state,
+            privateChatMessages: [
+                ...state.privateChatMessages,
+                action.chatMessage,
+            ],
+        };
+    }
 
     return state;
 }

@@ -42,30 +42,47 @@ export async function unfriend(otherUserId) {
     };
 }
 
-//CHAT FUNCTIONS
-// export async function addRecentMessages(data) {
-//     return {
-//         type: "GET_MESSAGES",
-//         messagesList: data,
-//     };
-// }
+//chat///////////////////
 
-// export async function postMessage(newMessage) {
-//     return {
-//         type: "POST_MESSAGES",
-//         message: newMessage,
-//     };
-// }
+export async function chatMessages(msgs) {
+    return {
+        type: "GET_MESSAGES",
+        messages: msgs,
+    };
+}
 
-// export async function deleteMessage(msgId) {
-//     console.log(msgId);
-//     await axios.post("/delete-comment", {
-//         // action: "DELETE_MESSAGE",
-//         msgId: msgId,
-//     });
+export async function chatMessage(msg) {
+    return {
+        type: "GET_MESSAGE",
+        message: msg,
+    };
+}
 
-//     return {
-//         type: "DELETE_MESSAGE",
-//         msgId: msgId,
-//     };
-// }
+export async function onlineUsers(onlineUsers) {
+    console.log("onlineUsers running");
+    return {
+        type: "GET_ONLINE_USERS",
+        onlineUsers: onlineUsers,
+    };
+}
+
+export async function userLeft(userLeave) {
+    return {
+        type: "USER_LEFT",
+        userLeft: userLeave,
+    };
+}
+
+export function privateChatMessages(msgs) {
+    return {
+        type: "PRIVATE_CHAT_MESSAGES",
+        chatMessages: msgs,
+    };
+}
+
+export function privateChatMessage(msg) {
+    return {
+        type: "PRIVATE_CHAT_MESSAGE",
+        chatMessage: msg,
+    };
+}

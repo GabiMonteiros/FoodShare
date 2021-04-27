@@ -2,17 +2,47 @@ const express = require("express");
 const app = express();
 const compression = require("compression");
 const path = require("path");
-const cookieSession = require("cookie-session");
 const csurf = require("csurf");
 const db = require("./db");
-const { hash, compare } = require("./bc"); 
+const { hash, compare } = require("./bc");
+const {
+    getLastTenMsgs,
+    insertMessage,
+    getOnlineUsers,
+    getPrivateChatMessages,
+    addNewPrivateMessage,
+    getPrivateChatMessage,
+    getUserData,
+} = require("./db");
 
+// create PW recovery codes
 const cryptoRandomString = require("crypto-random-string");
+// const secretCode = cryptoRandomString({
+//     length: 6,
+// });
+
+// to, body, subject
 const { sendEmail } = require("./ses");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const s3 = require("./s3");
+// my AWS S3 config
 const { s3Url } = require("../config.json");
+//chat
+// creating the initial handshake between socket and our server (cannot use Express for this)
+const server = require("http").Server(app);
+const io = require("socket.io")(server, {
+    allowRequest: (req, callback) =>
+        callback(
+            null,
+            req.headers.referer.startsWith(
+                "http://localhost:3000" || "https://localhost:3000"
+            )
+        ),//caso queira colocar online
+});
+
+
+///////////////////// MIDDLEWARE //////////////////
 
 //uploader
 const diskStorage = multer.diskStorage({
@@ -26,6 +56,8 @@ const diskStorage = multer.diskStorage({
     },
 });
 
+
+
 const uploader = multer({
     storage: diskStorage,
     limits: {
@@ -33,10 +65,7 @@ const uploader = multer({
     },
 });
 
-// let secret;
-// process.env.NODE_ENV === "production"
-//     ? (secret = process.env)
-//     : (secret = require("../secrets.json"));
+
 
 app.use(
     express.json({
@@ -44,7 +73,7 @@ app.use(
     })
 );
 
-//const cookieSession = require("cookie-session");
+const cookieSession = require("cookie-session");
 // const { userInfo } = require("os");
 //const { response } = require("express");
 const cookieSessionMiddleware = cookieSession({
@@ -53,6 +82,10 @@ const cookieSessionMiddleware = cookieSession({
 });
 
 app.use(cookieSessionMiddleware);
+//this is socket stuff
+io.use(function (socket, next) {
+    cookieSessionMiddleware(socket.request, socket.request.res, next);
+});
 
 //ficar atenta ao combo de csurf segurança 
 app.use(express.urlencoded({ extended: false }));
@@ -399,6 +432,127 @@ app.get("*", function (req, res) {
         res.sendFile(path.join(__dirname, "..", "client", "index.html"));
     }
 });
-app.listen(process.env.PORT || 3001, function () {
+server.listen(process.env.PORT || 3001, function () {
     console.log("I'm listening in 3000.");
 });
+
+/////////CHAT///////
+
+//this is our socket code. we will write 100% of our erver-side socket code here
+let onlineUsers = {};
+
+io.on("connection", (socket) => {
+    console.log(`socket id ${socket.id} is now connected`);
+    // console.log(
+    //     `UserId ${socket.request.session.userId} just connected!`
+    // );
+    const userId = socket.request.session.userId;
+
+    // we only do sockets when a user is logged in
+    //console.log("userid: ", userId);
+    if (!userId) {
+        return socket.disconnect(true);
+    }
+
+    onlineUsers[socket.id] = userId;
+    console.log("onlineUsers: ", onlineUsers);
+    const userIds = Object.values(onlineUsers);
+
+    getOnlineUsers(userIds).then((data) => {//
+        io.sockets.emit("onlineUsers", data.rows);
+    });
+    
+    getPrivateChatMessages(userId)//
+        .then((data) => {
+            io.to(socket.id).emit("privateChatMessages", data.rows);
+        })
+        .catch((err) => {
+            console.log("err in getPrivateChatMessages: ", err);
+        });
+
+    //this will run whatever the user posts a new chat message!
+    //1. INSERT new message into a our new 'chat_messages' table
+    socket.on("addNewPrivateMessage", async ({ message, receiverId }) => {
+        try {
+            const messageId = await addNewPrivateMessage(//
+                userId,
+                receiverId,
+                message
+            ); 
+
+            const newMessage = await getPrivateChatMessage(//
+                messageId.rows[0].id
+            );
+
+            for (const key in onlineUsers) {
+                if (
+                    onlineUsers[key] == userId ||
+                    onlineUsers[key] == receiverId
+                ) {
+                    io.to(key).emit("privateChatMessage", newMessage.rows[0]);
+                }
+            }
+        } catch (err) {
+            console.log("Error on addNewPrivateMessage(): ", err);
+        }
+    });
+    getLastTenMsgs()//
+        .then((data) => {
+            io.sockets.emit("chatMessages", data.rows.reverse());
+        })
+        .catch((err) => {
+            console.log("err in getLastTenMsgs: ", err);
+        });
+
+    socket.on("newMessage", (newMsg) => {
+        insertMessage(userId, newMsg)//
+            .then((data) => {
+                // 2. emit a message back to the client
+
+                getUserData(userId)
+                    .then((data) => {
+                        let infoMsg = {
+                            id: data.rows[0].id,
+                            first: data.rows[0].first,
+                            last: data.rows[0].last,
+                            profile_pic: data.rows[0].profile_pic,
+                            message: newMsg,
+                        };
+                        io.sockets.emit("chatMessage", infoMsg);
+                    })
+                    .catch((err) => {
+                        console.log(
+                            "err in getting user data from socket.on: ",
+                            err
+                        );
+                    });
+            })
+            .catch((err) => {
+                console.log("err in inserMessage: ", err);
+            });
+    });
+
+    socket.on("disconnect", function () {
+        io.sockets.emit("userLeft", onlineUsers[socket.id]);
+        delete onlineUsers[socket.id];
+        
+    });
+});// closes io.on('connection')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

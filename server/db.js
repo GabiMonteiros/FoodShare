@@ -198,3 +198,82 @@ module.exports.getFriendsWannabes = (userId) => {
     const params = [userId];
     return db.query(q, params);
 };
+
+//////////////////CHAT///////////////////////////
+
+
+module.exports.getLastTenMsgs = function () {
+    return db.query(`SELECT chats.id, chats.message, chats.sender_id, chats.created_at, users.first, users.last, users.profile_pic
+FROM chats
+JOIN users
+ON chats.sender_id = users.id
+ORDER BY created_at DESC
+LIMIT 10`);
+};
+
+module.exports.insertMessage = function (sender_id, message) {
+    return db.query(
+        `INSERT INTO chats (sender_id, message)
+        VALUES ($1, $2)
+        RETURNING message`,
+        [sender_id, message]
+    );
+};
+
+
+
+module.exports.getOnlineUsers = function (arrayOfIds) {
+    return db.query(
+        `SELECT id, first, last, profile_pic
+            FROM users
+            WHERE id = ANY ($1)`,
+        [arrayOfIds]
+    );
+};
+
+module.exports.getPrivateChatMessages = (id) => {
+    return db.query(
+        `
+        SELECT first, last, profile_pic, sender_id, receiver_id, private_chat.created_at, message, private_chat.id AS message_id
+        FROM private_chat
+        JOIN users
+        ON private_chat.sender_id = users.id
+        WHERE (sender_id = $1 OR receiver_id = $1)
+        ORDER BY private_chat.created_at
+    `,
+        [id]
+    );
+};
+
+module.exports.addNewPrivateMessage = (senderId, receiverId, message) => {
+    return db.query(
+        `
+        INSERT INTO private_chat (sender_id, receiver_id, message)
+        VALUES ($1, $2, $3)
+        RETURNING id
+    `,
+        [senderId, receiverId, message]
+    );
+};
+
+module.exports.getPrivateChatMessage = (messageId) => {
+    return db.query(
+        `
+        SELECT first, last, profile_pic, sender_id, receiver_id, private_chat.created_at, message, private_chat.id AS message_id
+        FROM private_chat
+        JOIN users
+        ON private_chat.sender_id = users.id
+        WHERE private_chat.id = $1
+    `,
+        [messageId]
+    );
+};
+
+
+module.exports.getUserData = function (id) {
+    return db.query(
+        `SELECT * FROM users WHERE id = $1`,
+        [id]);
+};
+
+//psql finalproject  -f setup.sql
