@@ -25,7 +25,7 @@ export default function Navigation() {
                     </li>
 
                     <li>
-                        <Link className="" to={"/users"}>
+                        <Link className="" to={"/connections"}>
                             Connections
                         </Link>
                     </li>

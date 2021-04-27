@@ -6,6 +6,7 @@ import Profile from "./profile.js";
 //import Logo from "./logo";
 import OtherProfile from "./otherporfile.js";
 import FindPeople from "./findPeople";
+import Friends from "./friends";
 //import CollaborativeNetwork from "./collaborativenetwork"; //findpeople
 // import FindDonors from "./finddonors";
 // import FindDistributor from "./finddistributor";
@@ -96,7 +97,7 @@ export default class App extends Component {
                                 />
                             )}
                         />
-                      
+
                         {this.state.uploaderIsVisible && (
                             <Uploader
                                 profile_pic={this.state.profile_pic}
@@ -108,6 +109,7 @@ export default class App extends Component {
                         diferente do que ta em server ou em component */}
                         <Route path="/user/:id" component={OtherProfile} />
                         <Route path="/users" component={FindPeople} />
+                        <Route path="/connections" component={Friends} />
                         {/* <Route path="/finddonors/" component={FindDonors} /> */}
                         {/* <Route path="/findfinddistributor/"component={FindDistributor}/> */}
                         {/* <Route path="/connections/" component={connections} />*/}

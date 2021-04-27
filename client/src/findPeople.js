@@ -43,7 +43,7 @@ export default function FindPeople() {
             <br></br>
             <p>Find Connections</p>
             <br></br> <br></br>
-            <h3>Find Connections</h3>
+            <h3>Find new partners!</h3>
             <p>Are you looking for a new partner to fight hunger? </p>
             <div className="search-box">
                 <input
@@ -58,7 +58,7 @@ export default function FindPeople() {
                     <Link to={"/user/" + user.id} className="searchedUsers">
                         <div className="">
                             <img
-                                className="profile-img-other"
+                                className="profile-img-other" //img-wrapper
                                 src={
                                     user.profile_pic || "../default-img-svg.png"
                                 }
@@ -66,12 +66,10 @@ export default function FindPeople() {
                         </div>
                     </Link>
                     <div className="users-bio">
-                        <p>
-                            <b>
-                                {user.first} {user.last} <br></br>
-                                {user.adress}, {user.active}
-                            </b>
-                        </p>
+                        <h4>
+                            {user.first} {user.last} <br></br>
+                            {user.adress}, {user.active}
+                        </h4>
                     </div>
                 </div>
             ))}

@@ -30,10 +30,10 @@ export default function Friends(props) {
     // VER O IMGS PROF ,  adress, active- ADD NO DB
     return (
         <>
-            <div className="container">
-                <h1>Friend Request</h1>
+            <div className="container-friends">
+                <h1>Connections Request</h1>
                 {/* {!wannabes && <p>Nothing here!</p>} */}
-                {(wannabes.length > 0 && (
+                {wannabes.length > 0 && (
                     <div className="sub-container">
                         {wannabes.map((wannabe) => (
                             <div className="card" key={wannabe.id}>
@@ -41,12 +41,13 @@ export default function Friends(props) {
                                     onClick={() => handleClick(wannabe.id)}
                                     src={
                                         wannabe["profile_pic"] ||
-                                        "../default-----"
+                                        "../default-img-svg.png"
                                     }
                                     alt={`${wannabe["first"]} ${wannabe["last"]}`}
                                 />
                                 <h2>
                                     {`${wannabe["first"]} ${wannabe["last"]}`}
+                                    {`${wannabe["adress"]}, ${wannabe["active"]}`}
                                 </h2>
                                 <button
                                     className="friendship"
@@ -59,10 +60,11 @@ export default function Friends(props) {
                             </div>
                         ))}
                     </div>
-                )) || <p>Nothing here!</p>}
+                )}
+                {/* // || <p>Nothing here!</p> */}
             </div>
-            <div className="container">
-                <h1>Friends</h1>
+            <div className="container-friends">
+                <h3>Your Connections</h3>
                 {(friends.length > 0 && (
                     <div className="sub-container">
                         {friends.map((friend) => (
@@ -71,11 +73,20 @@ export default function Friends(props) {
                                     onClick={() => handleClick(friend.id)}
                                     src={
                                         friend["profile_pic"] ||
-                                        "../default----"
+                                        "../default-img-svg.png"
                                     }
                                     alt={`${friend["first"]}}`}
                                 />
-                                <h2>{`${friend["last"]}`}</h2>
+                                <h3>
+                                    {`${friend["first"]}`} {`${friend["last"]}`}
+                                </h3>
+                                <p>
+                                    {" "}
+                                    <b>
+                                        {`${friend["adress"]}`},{" "}
+                                        {`${friend["active"]}`}
+                                    </b>
+                                </p>
                                 <button
                                     className="friendship"
                                     onClick={() =>
@@ -92,3 +103,4 @@ export default function Friends(props) {
         </>
     );
 }
+

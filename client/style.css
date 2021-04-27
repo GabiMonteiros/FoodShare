@@ -477,6 +477,12 @@ textarea:focus {
     grid-gap: 2vw;
 }
 
+.findPeople p {
+  font-weight: 10;
+	font-size: calc(0.5rem + 1vmin);
+  
+}
+
 /* .other .bio-cropper{
     text-align: center;
     border: 2px solid #57f05d;
@@ -491,3 +497,62 @@ $primary-color: #fe7bdb;
 $secundary-color: #95e5fe;
 $third-color: #8dffe8; meuu #fbfe4b
 $fourth-color: #fbfe4b; - #fbfe4b */
+
+/*/////// connections - friends ////////////*/
+.container-friends{
+    display: flex;
+    flex-direction: column;
+}
+
+.sub-container {
+  display: flex;
+  flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+  line-height: 1.4;
+  height: 100%;
+}
+
+.card {
+  width: 150px;
+  height: 300px;
+	border-radius: 10px;
+	text-align: center;
+  padding: 30px 30px;
+  margin: 1vh 1vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sub-container img {
+	height: 150px;
+	width: 150px;
+	border-radius: 50%;
+	margin: auto auto 15px;
+  display: block;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center right;
+  cursor: pointer;
+}
+
+.sub-container h3, p {
+  margin: auto;
+	font-weight: 300;
+	font-size: calc(1rem + 1vmin);
+  
+}
+.sub-container  p {
+  margin: auto;
+  
+	font-weight: 10;
+	font-size: calc(0.7rem + 1vmin);
+  
+}
+
+.card button {
+  width: 120px;
+  height: 40px;
+  font-size: calc(.5rem + 1vmin);
+}

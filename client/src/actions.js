@@ -42,6 +42,7 @@ export async function unfriend(otherUserId) {
     };
 }
 
+//CHAT FUNCTIONS
 // export async function addRecentMessages(data) {
 //     return {
 //         type: "GET_MESSAGES",
