@@ -3,11 +3,13 @@ import { socket } from "./socket";
 import { useSelector } from "react-redux";
 import Onlineusers from "./onlineUsers";
 import { Link } from "react-router-dom";
+// import { deleteMessage } from "./actions";
 
 export default function Chat() {
     const elemRef = useRef();
-    const chatMessages = useSelector((state) => state && state.messages);
+    // const dispatch = useDispatch();
 
+    const chatMessages = useSelector((state) => state && state.messages);
     useEffect(() => {
         // console.log("elemReft is", elemRef);
         // console.log("scroll top", elemRef.current.scrollTop);
@@ -30,12 +32,14 @@ export default function Chat() {
 
     console.log(chatMessages);
 
-    return (
-        <div>
-            <Onlineusers />
-            <h2>Welcome to chatroom</h2>
 
-            <div className="chat-container" ref={elemRef}>
+    return (
+        <div className="chat-container">
+            <h3>Welcome to chatroom</h3>
+            
+            <Onlineusers /> <br></br>
+            <br></br>
+            <div className="message-container" ref={elemRef}>
                 {chatMessages &&
                     chatMessages.map((message) => {
                         return (
@@ -46,8 +50,8 @@ export default function Chat() {
                             >
                                 <Link to={`/user/${message.sender_id}`}>
                                     <img
-                                        //className="chatProfilePic" - diminuir o tamanho 
-                                        className="profile-img"
+                                        //className="chatProfilePic" - diminuir o tamanho
+                                        className="profile-img-chat"
                                         src={
                                             message.profile_pic ||
                                             "../default-img-svg.png"
@@ -59,7 +63,8 @@ export default function Chat() {
                                     <p>
                                         {message.first} {message.last} says:
                                     </p>
-                                    {message.message}
+                                    <p>{message.message}</p>
+
                                     <span className="timestamp">
                                         {message["create_at"]}
                                     </span>

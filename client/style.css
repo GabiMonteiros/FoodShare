@@ -556,3 +556,118 @@ $fourth-color: #fbfe4b; - #fbfe4b */
   height: 40px;
   font-size: calc(.5rem + 1vmin);
 }
+
+/*/////// CHAT ////////////*/
+
+/*CAIXA DE WALL POSTS*/
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  margin: 2vw 20vh;
+  padding: 2vw 2vh;
+  border: 2px solid #383838;
+  border-radius: 30px;
+  box-shadow: 4px 5px 0px 0px #383838;
+}
+
+.chat-container textarea {
+  width: 70%;
+  margin: 1vh 1vw;
+  border-radius: 30px;
+  align-self: center;
+}
+
+.messages-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+.message-container {
+  margin: 3vh 1vw;
+  border-radius: 30px;
+}
+
+.message-container > img {
+  padding: 1vh 1vw;
+  grid-row: 1 / span 2 ;
+  cursor: default;
+}
+
+.message-container:nth-child(odd) {
+  background-color: rgba(184, 242, 230, 0.2);
+}
+
+.message-container:nth-child(even) {
+  background-color: rgba(255, 148, 169, 0.2);
+}
+
+.message-container:nth-child(odd) svg:hover {
+   color: rgba(230, 219, 60); /*#fbfe4b */
+}
+
+.message-container:nth-child(even) svg:hover {
+  color: rgba(184, 242, 230); /*#95e5fe;*/
+}
+
+.user {
+  font-weight: 700;
+}
+
+.timestamp {
+  font-style: italic;
+  font-weight: 300;
+  font-size: calc(0.4rem + 1vmin);
+  color: gray;
+}
+
+.deleteMsg {
+  padding: 2vh 2vw;
+  grid-column: 2;
+  justify-self: end ;
+}
+
+.profile-img-chat{
+  height: 40px; 
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #57f05d;
+  object-fit: cover;
+  object-position: center right;
+  cursor: pointer;
+  transition: 1s box-shadow;
+
+}
+
+.chattext p {
+  margin: auto;
+  
+	font-weight: 10;
+	font-size: calc(0.rem + 1vmin);
+  
+}
+
+.online-user{
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0)70%, #57f05d 30%);
+}
+.online-user {
+    background: linear-gradient(180deg, rgba(230, 32, 32, 0) 50%, #57f05d 50%);
+}
+
+
+/*quem ta online */
+
+/* .outerprofile{
+    background-color: aqua;
+    border-radius: 50%;
+    height: 10px;
+    width: 10px; 
+
+}
+*/
+/*
+position: relative;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  transition: 1s box-shadow;
+  background-color: ghostwhite;
+  border: 2px solid #57f05d;*/

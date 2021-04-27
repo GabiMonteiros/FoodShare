@@ -1,6 +1,7 @@
 import { Component } from "react";
 import axios from "./axios";
 import FriendButton from "./friendButton";
+import PrivateChat from "./privatechat";
 
 export default class OtherProfile extends Component {
     constructor() {
@@ -74,7 +75,14 @@ export default class OtherProfile extends Component {
                     otherUserId={this.state.otherUserId}
                     userId={this.state.userId}
                 />
+           
+            
+                <PrivateChat
+                    otherUserId={this.state.id}
+                    userId={this.props.userId}
+                />
             </div>
+
         );
     }
 }

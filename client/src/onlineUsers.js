@@ -10,6 +10,7 @@ export default function Onlineusers() {
 
     return (
         <div className="friendslist">
+            <h4>Users Online:</h4>
             {onlineUsers &&
                 onlineUsers.map((useron, id) => (
                     <div className="outerprofile" key={id}>
@@ -18,8 +19,10 @@ export default function Onlineusers() {
                                 <img id="profilepic" src={useron.profile_pic} />
                             </Link>
                         </div>
-                        <br></br>
-                        {useron.first} {useron.last}
+                        <span className="online-user ">
+                            {useron.first} {useron.last}
+                        </span>
+                        
                     </div>
                 ))}
         </div>

@@ -5,22 +5,18 @@ import Logo from "./logo";
 export default function Navigation() {
     return (
         <header>
-            <Link to="/welcome">
+            <Link to="/">
                 <Logo />
             </Link>
             <h1 className="nav">Food Share</h1>
             <nav>
                 <ul>
+                    
+                    
                     <li>
                         {/* to={"/users"}> */}
-                        <Link className="" to={"/findonors"}>
-                            Donors
-                        </Link>{" "}
-                    </li>
-                    <li>
-                        {/* to={"/users"}> */}
-                        <Link className="" to={"/finddistributor"}>
-                            Distribuitors
+                        <Link className="" to={"/users"}>
+                            New Parthers
                         </Link>{" "}
                     </li>
 
@@ -30,11 +26,11 @@ export default function Navigation() {
                         </Link>
                     </li>
 
-                    {/* <li>
+                    <li>
                         <Link to="/chat">
-                            <Chat className="icon" />
+                            Chat
                         </Link>
-                     {/*</li> */}
+                    </li>
                     {/* <li>
                         <Link className="" to={"/logout"}>
                             Logout
