@@ -2,27 +2,21 @@ import { useState, useEffect } from "react";
 import axios from "./axios";
 
 export default function FriendButton({ otherUserId, userId }) {
-    const [buttonTxt, setButtonTxt] = useState("");
+    const [buttonTxt, setButtonTxt] = useState('');
 
     useEffect(() => {
-        axios
-            .get("/friendship-status/" + otherUserId)
+        axios.get("/friendship-status/" + otherUserId)
             .then(({ data }) => {
                 const text = friendshipStatusButtonTxt(data, userId);
                 setButtonTxt(text);
-            })
-            .catch((error) => {
+            }).catch((error) => {
                 console.log("error in /friendship-status/", error);
             });
     }, [otherUserId]);
 
     function handleClick(e) {
         e.preventDefault();
-        axios
-            .post("/friendship-action", {
-                action: buttonTxt,
-                otherUserId: otherUserId,
-            })
+        axios.post("/friendship-action", {action: buttonTxt, otherUserId: otherUserId})
             .then(({ data }) => {
                 const text = friendshipStatusButtonTxt(data, userId);
                 setButtonTxt(text);
@@ -39,6 +33,7 @@ export default function FriendButton({ otherUserId, userId }) {
         </button>
     );
 }
+
 
 function friendshipStatusButtonTxt(friendshipStatus, userId) {
     const BUTTON_TEXT = {

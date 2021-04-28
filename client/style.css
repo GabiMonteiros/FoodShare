@@ -60,7 +60,7 @@ header {
 
 /* SUBLINADO QND SCROLL NAV */
 .scroll {
-    box-shadow: 0 8px 6px -6px #57f05d;
+    box-shadow: 0 8px 3px -6px #57f05d;
 }
 
 .logo {
@@ -327,15 +327,7 @@ label {
     grid-template-rows: 32%  1fr;
     grid-gap: 2vw;
 }
-/*
- margin: 15vh 5vw;
-    flex-grow: 1;
-    position: relative;
-    display: grid;
-    grid-template-columns: 19%  1fr 30%;
-    grid-template-rows: 32%  1fr;
-    grid-gap: 2vw;
- */
+
 .profile-img {
     height: 18rem;
     width: 19rem;
@@ -346,6 +338,15 @@ label {
     border-radius: 50%;
 }
 
+header .profile-img{
+  height: 3rem;
+    width: 3rem;
+    object-fit: contain;
+    object-position: center;
+    cursor: pointer;
+    border: 2px solid #57f05d;
+    border-radius: 50%;
+}
 /* position: relative;
   border-radius: 50%;
   width: 200px;
@@ -369,6 +370,10 @@ $secundary-color: #95e5fe;
 $third-color: #8dffe8; meuu #fbfe4b
 $fourth-color: #fbfe4b; - #fbfe4b */
 
+.bio-cropper-profile p{
+  font-size: 15px;
+  margin: 10px;
+}
  
 .add-bio {
     background: linear-gradient(180deg, rgba(230, 32, 32, 0)70%, #fbfe4b);
@@ -435,7 +440,8 @@ textarea:focus {
 }
 
 .bio-cropper p{
-    font-size: 15px;
+  font-size: 15px;
+   
 }
 
 /*profile other profile name */
@@ -535,6 +541,7 @@ $fourth-color: #fbfe4b; - #fbfe4b */
   justify-content: space-between;
 }
 
+
 .sub-container img {
 	height: 150px;
 	width: 150px;
@@ -566,6 +573,8 @@ $fourth-color: #fbfe4b; - #fbfe4b */
   height: 40px;
   font-size: calc(.5rem + 1vmin);
 }
+
+
 
 /*/////// CHAT ////////////*/
 

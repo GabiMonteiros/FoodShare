@@ -15,7 +15,7 @@ export default function PrivateChat(props) {
 
     const keyCheck = (e) => {
         if (e.key === "Enter") {
-            console.log("props.otherUserId", props.otherUserId);
+
             e.preventDefault();
             socket.emit("addNewPrivateMessage", {
                 message: e.target.value,

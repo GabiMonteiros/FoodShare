@@ -10,9 +10,9 @@ export default function Profile(props) {
                 profile_pic={props.profile_pic}
             />
             <div className="bio-cropper">
-                <h1>
+                <h3>
                     {props.first} {props.last}
-                </h1>
+                </h3>
 
                 <p>
                     <b>
@@ -20,8 +20,9 @@ export default function Profile(props) {
                     </b>
                 </p>
                 <br></br>
-                <BioEditor setBio={props.setBio}  bio={props.bio} />
-                
+                <div className="bio-cropper-profile">
+                    <BioEditor setBio={props.setBio} bio={props.bio} />
+                </div>
             </div>
         </div>
     );

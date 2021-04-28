@@ -2,8 +2,8 @@ import { Component } from "react";
 import axios from "./axios.js";
 import Uploader from "./uploader.js";
 import Profile from "./profile.js";
-//import ProfilePic from "./profilepic";
-//import Logo from "./logo";
+import ProfilePic from "./profilepic"; 
+import Logo from "./logo";
 import OtherProfile from "./otherporfile.js";
 import FindPeople from "./findPeople";
 import Friends from "./friends";
@@ -16,8 +16,8 @@ import Chat from "./chat";
 // import Chat from "./hooks/chat";
 // import Account from "./account"; //deleteaccount
 import { BrowserRouter, Route } from "react-router-dom";
-// import { Link } from "react-router-dom";
-import Navigation from "./navagation.js";
+import { Link } from "react-router-dom";
+// import Navigation from "./navagation.js";
 
 
 export default class App extends Component {
@@ -44,14 +44,20 @@ export default class App extends Component {
                 console.log("error", error);
             });
     }
-    
+    //listen o scroll para iluminar o underline header
+    handleScroll() {
+        if (window.scrollY > 20) {
+            document.querySelector("header").className = "scroll";
+        } else {
+            document.querySelector("header").className = "";
+        }
+    }
 
     toggleUploader() {
         this.setState({
             uploaderIsVisible: !this.state.uploaderIsVisible,
         });
     }
-
 
     setImage(newProfilePic) {
         this.setState({
@@ -65,22 +71,45 @@ export default class App extends Component {
         });
     }
 
-
     render() {
-       
-
         return (
             <div id="app">
                 <BrowserRouter>
                     <>
-                        <Navigation />
-                        {/* PENSAR A LOCALIZACAO
-                        <div className="profile-img-header">
-                            <ProfilePic
-                                {...this.state.user}
-                                showUploader={() => this.showUploader()}
-                            />
-                        </div> */}
+                        <header>
+                            <Link to="/">
+                                <Logo />
+                            </Link>
+                            <Link to="/">
+                                <h1 className="nav">Food Share</h1>
+                            </Link>
+                            <nav>
+                                <ul>
+                                    <li>
+                                        <Link to="/users">New Parthers</Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/connections">
+                                            Connections
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/chat">Chat</Link>
+                                    </li>
+                                    <li>
+                                        <ProfilePic
+                                            id={this.state.id}
+                                            first={this.state.first}
+                                            last={this.state.last}
+                                            image={this.state.image}
+                                            toggleUploader={() =>
+                                                this.toggleUploader()
+                                            }
+                                        />
+                                    </li>
+                                </ul>
+                            </nav>
+                        </header>
                         <Route
                             exact
                             path="/"
@@ -124,5 +153,4 @@ export default class App extends Component {
             </div>
         );
     }
-  
 }    

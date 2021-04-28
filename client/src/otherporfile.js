@@ -59,10 +59,10 @@ export default class OtherProfile extends Component {
                     />
                 </div>
                 <div className="bio-cropper">
-                    <h1>
+                    <h3>
                         {this.state.first} {this.state.last}
                         <br></br>
-                    </h1>
+                    </h3>
                     <h4>
                         <b>
                             {this.state.adress}, {this.state.active}
@@ -78,7 +78,7 @@ export default class OtherProfile extends Component {
 
                 <div className="privetechat-container">
                     <PrivateChat
-                        otherUserId={this.props.match.params.id} //shoud be the same user id that is on .get("/api/user/"
+                        otherUserId={this.props.match.params.id} //should be the same user id that is on .get("/api/user/" otherprofile component
                         userId={this.props.userId}
                     />
                 </div>
