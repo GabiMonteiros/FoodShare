@@ -78,7 +78,7 @@ export default class OtherProfile extends Component {
 
                 <div className="privetechat-container">
                     <PrivateChat
-                        otherUserId={this.state.id}
+                        otherUserId={this.props.match.params.id} //shoud be the same user id that is on .get("/api/user/"
                         userId={this.props.userId}
                     />
                 </div>

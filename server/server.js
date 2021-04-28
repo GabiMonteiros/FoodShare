@@ -474,6 +474,7 @@ io.on("connection", (socket) => {
     //1. INSERT new message into a our new 'chat_messages' table
     socket.on("addNewPrivateMessage", async ({ message, receiverId }) => {
         try {
+            console.log("userId: ", receiverId);
             const messageId = await addNewPrivateMessage(//
                 userId,
                 receiverId,
