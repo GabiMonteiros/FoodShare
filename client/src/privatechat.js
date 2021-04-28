@@ -26,7 +26,7 @@ export default function PrivateChat(props) {
 
     return (
         <div className="private-chat">
-            <h2>Private Chat</h2>
+            <h3>Private Chat</h3>
             <div className="chat-messages-container" ref={elemRef}>
                 {privateChatMessages &&
                     privateChatMessages.map((msg, id) => {
@@ -50,12 +50,14 @@ export default function PrivateChat(props) {
                         );
                     })}
             </div>
-            <textarea
-                name="message"
-                rows="2"
-                placeholder="Write message..."
-                onKeyDown={keyCheck}
-            ></textarea>
+            <div className="textarea-private">
+                <textarea
+                    name="message"
+                    rows="2"
+                    placeholder="Write message..."
+                    onKeyDown={keyCheck}
+                ></textarea>
+            </div>
         </div>
     );
 }

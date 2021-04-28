@@ -76,6 +76,7 @@ export default function Chat() {
             {/* <textarea onKeyDown={handleKeyDown} /> - realocar a caixa de texto
                 <FaArrowCircleUp
                     className="scrollTop" */}
+            
             <textarea
                 placeholder="Add your message here"
                 onKeyDown={keyCheck}

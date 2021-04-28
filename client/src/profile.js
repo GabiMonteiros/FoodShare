@@ -5,19 +5,23 @@ import ProfilePic from "./profilepic";
 export default function Profile(props) {
     return (
         <div className="profile">
-            <ProfilePic 
+            <ProfilePic
                 toggleUploader={props.toggleUploader}
                 profile_pic={props.profile_pic}
             />
             <div className="bio-cropper">
-                <h3>
+                <h1>
                     {props.first} {props.last}
-                </h3>
+                </h1>
 
                 <p>
-                    <b>{props.adress}, {props.active}</b>
+                    <b>
+                        {props.adress}, {props.active}
+                    </b>
                 </p>
-                <BioEditor setBio={props.setBio} bio={props.bio} />
+                <br></br>
+                <BioEditor setBio={props.setBio}  bio={props.bio} />
+                
             </div>
         </div>
     );

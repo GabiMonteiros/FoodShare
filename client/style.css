@@ -434,6 +434,16 @@ textarea:focus {
 
 }
 
+.bio-cropper p{
+    font-size: 15px;
+}
+
+/*profile other profile name */
+.bio-cropper h1{
+    font-family: Verdana;
+    font-weight: 20;
+    font-size: 25px;
+}
 .profile .profile-img:hover,
 .findPeople .profile-img:hover {
   box-shadow: none;
@@ -652,6 +662,22 @@ $fourth-color: #fbfe4b; - #fbfe4b */
     background: linear-gradient(180deg, rgba(230, 32, 32, 0) 50%, #57f05d 50%);
 }
 
+/*//////////////PRIVATE CHAT //////////////////////*/
+
+.privetechat-container{
+  display: flex;
+  flex-direction: column;
+  margin: 1vw 48vh;
+  padding: 1vw 2vh;
+  
+  
+}
+
+.private-chat textarea {
+    width: 350px;
+    height: 150px;
+       
+}
 
 /*quem ta online */
 

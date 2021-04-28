@@ -59,10 +59,10 @@ export default class OtherProfile extends Component {
                     />
                 </div>
                 <div className="bio-cropper">
-                    <h3>
+                    <h1>
                         {this.state.first} {this.state.last}
                         <br></br>
-                    </h3>
+                    </h1>
                     <h4>
                         <b>
                             {this.state.adress}, {this.state.active}
@@ -75,14 +75,14 @@ export default class OtherProfile extends Component {
                     otherUserId={this.state.otherUserId}
                     userId={this.state.userId}
                 />
-           
-            
-                <PrivateChat
-                    otherUserId={this.state.id}
-                    userId={this.props.userId}
-                />
-            </div>
 
+                <div className="privetechat-container">
+                    <PrivateChat
+                        otherUserId={this.state.id}
+                        userId={this.props.userId}
+                    />
+                </div>
+            </div>
         );
     }
 }
