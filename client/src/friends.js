@@ -45,10 +45,14 @@ export default function Friends(props) {
                                     }
                                     alt={`${wannabe["first"]} ${wannabe["last"]}`}
                                 />
-                                <h2>
-                                    {`${wannabe["first"]} ${wannabe["last"]}`}
+                                <h4>
+                                    {`${wannabe["first"]} ${wannabe["last"]}`}{" "}
+                                    <br></br>
+                                </h4>
+
+                                <p>
                                     {`${wannabe["adress"]}, ${wannabe["active"]}`}
-                                </h2>
+                                </p>
                                 <button
                                     className="friendship"
                                     onClick={() =>
@@ -63,9 +67,13 @@ export default function Friends(props) {
                 )}
                 {/* // || <p>Nothing here!</p> */}
             </div>
+            <br></br>
+            <br></br>
+            <br></br>
+            <br></br>
+            <h2>Your Connections</h2>
             <div className="container-friends">
-                <h3>Your Connections</h3>
-                {(friends.length > 0 && (
+                {friends.length > 0 && (
                     <div className="sub-container">
                         {friends.map((friend) => (
                             <div className="card" key={friend.id}>
@@ -77,15 +85,13 @@ export default function Friends(props) {
                                     }
                                     alt={`${friend["first"]}}`}
                                 />
-                                <h3>
+                                <h4>
                                     {`${friend["first"]}`} {`${friend["last"]}`}
-                                </h3>
+                                </h4>
                                 <p>
-                                    {" "}
-                                    <b>
-                                        {`${friend["adress"]}`},{" "}
-                                        {`${friend["active"]}`}
-                                    </b>
+                                   
+                                    {`${friend["adress"]}`},
+                                    {`${friend["active"]}`}
                                 </p>
                                 <button
                                     className="friendship"
@@ -98,7 +104,8 @@ export default function Friends(props) {
                             </div>
                         ))}
                     </div>
-                )) || <p>you have no friends. Why don´t you find some?</p>}
+                )}
+                {/* || <p>you have no friends. Why don´t you find some?</p> */}
             </div>
         </>
     );

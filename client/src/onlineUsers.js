@@ -14,15 +14,18 @@ export default function Onlineusers() {
             {onlineUsers &&
                 onlineUsers.map((useron, id) => (
                     <div className="outerprofile" key={id}>
-                        <div className="innerimage">
+                        {/* <div className="innerimage">
                             <Link to={"/user/" + useron.id}>
                                 <img id="profilepic" src={useron.profile_pic} />
+                                <br></br>
                             </Link>
-                        </div>
+                        </div> */}
+
                         <span className="online-user ">
-                            {useron.first} {useron.last}
+                            <Link to={"/user/" + useron.id}>
+                                {useron.first} {useron.last}
+                            </Link>
                         </span>
-                        
                     </div>
                 ))}
         </div>

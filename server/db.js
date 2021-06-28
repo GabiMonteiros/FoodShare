@@ -125,7 +125,7 @@ module.exports.getUsers = () => {
         SELECT id, first, last, bio, profile_pic, adress, active
         FROM users
         ORDER BY id DESC
-        LIMIT 3;
+        LIMIT 10;
         `;
     return db.query(q);
 };

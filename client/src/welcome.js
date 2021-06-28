@@ -40,12 +40,12 @@ export default function Welcome() {
                             <ul>
                                 <li>
                                     <Link to="/registration">
-                                        <p>Sign Up</p>
+                                        Sign Up
                                     </Link>
                                 </li>
                                 <li>
                                     <Link to="/login">
-                                        <p>Login</p>
+                                        Login
                                     </Link>
                                 </li>
                             </ul>

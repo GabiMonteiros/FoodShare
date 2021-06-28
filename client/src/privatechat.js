@@ -39,7 +39,7 @@ export default function PrivateChat(props) {
                         }
                         return (
                             <div key={id}>
-                                <div>
+                                <div className="boxchat-private">
                                     <span className="chat-message-name">
                                         {msg.first} {msg.last}
                                     </span>
